@@ -44,5 +44,8 @@ map::map_node const &find_closest_node_to(map::map_graph const &graph,
 
 double waiting_time(map::map_node const &node) { return node[0].weight(); }
 
+void find_path_astar(map::map_graph const &graph, math::vector2d target_location) {}
+
+
 } // namespace pigisland
 } // namespace kmint

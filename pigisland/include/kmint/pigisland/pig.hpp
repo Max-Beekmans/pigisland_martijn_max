@@ -7,13 +7,12 @@
 
 namespace kmint {
 namespace pigisland {
-
 class pig : public play::free_roaming_actor {
 public:
   pig(math::vector2d location);
   const ui::drawable &drawable() const override { return drawable_; }
-
-
+protected:
+    std::string name() const override { return std::string("pig"); }
 private:
   play::image_drawable drawable_;
 };

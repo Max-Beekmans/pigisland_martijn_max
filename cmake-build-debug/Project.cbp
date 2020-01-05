@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Project"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\libkmint\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\;CMake Files\pigisland\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="kmint">
+				<Option output="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/out/libkmint.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/include"/>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint/Makefile&quot;  VERBOSE=1 kmint"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="kmint/fast">
+				<Option output="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/out/libkmint.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/include"/>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint/Makefile&quot;  VERBOSE=1 kmint/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/libkmint/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="pigisland-resources">
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 pigisland-resources"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="pigisland">
+				<Option output="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/out/pigisland" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/out"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src"/>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/include"/>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/include"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 pigisland"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="pigisland/fast">
+				<Option output="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/out/pigisland" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/out"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src"/>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/include"/>
+					<Add directory="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/include"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 pigisland/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/osboxes/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/pigisland/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/graph/graph.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/map/map.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/math/angle.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/play/actor.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/play/image_drawable.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/play/stage.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/random.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/ui/app.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/ui/events/event.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/ui/renderer.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/ui/renderer.hpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/ui/sdl/texture.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/ui/sdl/texture.hpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/src/kmint/ui/window.cpp">
+			<Option target="kmint"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/boat.cpp">
+			<Option target="pigisland"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/main.cpp">
+			<Option target="pigisland"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/node_algorithm.cpp">
+			<Option target="pigisland"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/pig.cpp">
+			<Option target="pigisland"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/resources.cpp">
+			<Option target="pigisland"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/shark.cpp">
+			<Option target="pigisland"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/libkmint/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\libkmint\"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/../../../../../usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\"/>
+		</Unit>
+		<Unit filename="/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\pigisland\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

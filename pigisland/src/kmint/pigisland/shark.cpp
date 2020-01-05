@@ -21,8 +21,8 @@ void shark::act(delta_time dt) {
   // laat ook even zien welke varkentjes hij ruikt
   for (auto i = begin_perceived(); i != end_perceived(); ++i) {
     auto const &a = *i;
-    std::cout << "Smelled a pig at " << a.location().x() << ", "
-              << a.location().y() << "\n";
+    std::cout << "Smelled a " + a.getName() +   " at " << a.getLocation().x() << ", "
+              << a.getLocation().y() << "\n";
   }
 }
 

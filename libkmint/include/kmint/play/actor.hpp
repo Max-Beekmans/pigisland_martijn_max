@@ -83,7 +83,7 @@ public:
 * \return true if the actor must be drawn in the next frame. False otherwise.
    */
   virtual bool must_draw() const { return true; }
-  virtual math::vector2d location() const = 0;
+  virtual math::vector2d getLocation() const = 0;
   /*!
    * Return the collision range.
    *
@@ -310,6 +310,11 @@ public:
     return add_perceived_iterator { *this };
   }
 
+  const std::string getName() const { return name(); }
+
+protected:
+    virtual std::string name() const { return {}; }
+
   private:
     std::vector<actor *> collision_set_;
     std::vector<actor *> perceived_set_;
@@ -319,7 +324,7 @@ public:
 
     math::rectangle square_box_centered(scalar dim) const {
       auto hdim = dim / 2;
-      auto loc = location();
+      auto loc = getLocation();
       return {{loc.x() - hdim, loc.y() - hdim}, {dim, dim}};
   }
 };
@@ -345,7 +350,7 @@ inline bool collides(actor const &a1, actor const &a2) {
 inline bool sees(actor const &observer, actor const &candidate) {
   if (!observer.perceptive() || !candidate.perceivable())
     return false;
-  return contains(observer.perception_box(), candidate.location());
+  return contains(observer.perception_box(), candidate.getLocation());
 }
 } // namespace kmint::play
 

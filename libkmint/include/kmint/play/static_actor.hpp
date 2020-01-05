@@ -10,7 +10,7 @@ namespace kmint::play {
 class static_actor : public actor {
 public:
   static_actor(math::vector2d fixed_location) : location_{fixed_location} {}
-  math::vector2d location() const override { return location_; }
+  math::vector2d getLocation() const override { return location_; }
 
 private:
   math::vector2d location_;

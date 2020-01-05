@@ -9,6 +9,9 @@ namespace pigisland {
 pig::pig(math::vector2d location)
   : play::free_roaming_actor{location},
     drawable_{*this, pig_image()} {
+    for (auto i = begin_perceived(); i != end_perceived(); ++i) {
+        auto const &a = *i;
+    }
 }
 
 

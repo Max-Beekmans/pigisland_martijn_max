@@ -49,6 +49,12 @@ map::map_node const &find_shark_resting_place(map::map_graph const &graph);
 ///
 map::map_node const &find_closest_node_to(map::map_graph const &graph,
                                           math::vector2d location);
+
+///
+/// Finds path the A* way and tags the nodes
+///
+void find_path_astar(map::map_graph const &graph, math::vector2d target_location);
+
 } // namespace pigisland
 } // namespace kmint
 

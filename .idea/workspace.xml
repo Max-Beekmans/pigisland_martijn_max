@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated />
+    <generated>
+      <config projectName="Project" targetName="pigisland-resources" />
+      <config projectName="Project" targetName="kmint" />
+      <config projectName="Project" targetName="pigisland" />
+    </generated>
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -9,7 +13,23 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e9ec2b0-0c45-4419-99cb-3812c6b71dd2" name="Default Changelist" comment="" />
+    <list default="true" id="8e9ec2b0-0c45-4419-99cb-3812c6b71dd2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libkmint/include/kmint/play/actor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/libkmint/include/kmint/play/actor.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libkmint/include/kmint/play/free_roaming_actor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/libkmint/include/kmint/play/free_roaming_actor.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libkmint/include/kmint/play/graph_bound_actor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/libkmint/include/kmint/play/graph_bound_actor.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libkmint/include/kmint/play/quad_tree.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/libkmint/include/kmint/play/quad_tree.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libkmint/include/kmint/play/static_actor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/libkmint/include/kmint/play/static_actor.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libkmint/src/kmint/play/image_drawable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/libkmint/src/kmint/play/image_drawable.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pigisland/include/kmint/pigisland/boat.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/pigisland/include/kmint/pigisland/boat.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pigisland/include/kmint/pigisland/node_algorithm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/pigisland/include/kmint/pigisland/node_algorithm.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pigisland/include/kmint/pigisland/pig.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/pigisland/include/kmint/pigisland/pig.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pigisland/include/kmint/pigisland/shark.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/pigisland/include/kmint/pigisland/shark.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pigisland/src/kmint/pigisland/node_algorithm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/pigisland/src/kmint/pigisland/node_algorithm.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pigisland/src/kmint/pigisland/pig.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/pigisland/src/kmint/pigisland/pig.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pigisland/src/kmint/pigisland/shark.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/pigisland/src/kmint/pigisland/shark.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +37,10 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1Vni2IhHsR4F0TdNyZ1Ggo5qlV7" />
   <component name="ProjectViewState">
@@ -26,9 +50,39 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
+    <property name="cf.advertisement.text.has.clang-format" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pigisland-force_driven_entities" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+  </component>
+  <component name="RunManager" selected="CMake Application.pigisland">
+    <configuration name="kmint" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="kmint" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="pigisland-resources" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="pigisland-resources" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="pigisland" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="pigisland" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.kmint" />
+      <item itemvalue="CMake Application.pigisland" />
+      <item itemvalue="CMake Application.pigisland-resources" />
+    </list>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -42,6 +96,9 @@
       </list>
     </option>
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="8e9ec2b0-0c45-4419-99cb-3812c6b71dd2" name="Default Changelist" comment="" />
@@ -52,34 +109,76 @@
       <workItem from="1577895053493" duration="2206000" />
       <workItem from="1577908500700" duration="727000" />
       <workItem from="1578007229299" duration="1118000" />
+      <workItem from="1578090196772" duration="2207000" />
+      <workItem from="1578147464534" duration="2546000" />
+      <workItem from="1578165715627" duration="16382000" />
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1815" height="295" key="GridCell.Tab.0.bottom" timestamp="1578007980675">
-      <screen x="62" y="0" width="1858" height="1080" />
+    <state x="70" y="308" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578175996328">
+      <screen x="70" y="27" width="948" height="1828" />
+    </state>
+    <state x="422" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.1788.988@70.27.1788.988" timestamp="1578091781372" />
+    <state x="70" y="308" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.948.1828@70.27.948.1828" timestamp="1578175996328" />
+    <state x="638" y="244" width="642" height="560" key="#kmint" timestamp="1578091599423">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state x="638" y="244" width="642" height="560" key="#kmint/70.27.1788.988@70.27.1788.988" timestamp="1578091599423" />
+    <state x="638" y="244" width="642" height="560" key="#pigisland-resources" timestamp="1578091604052">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state x="638" y="244" width="642" height="560" key="#pigisland-resources/70.27.1788.988@70.27.1788.988" timestamp="1578091604052" />
+    <state x="327" y="699" width="424" height="491" key="FileChooserDialogImpl" timestamp="1578184138769">
+      <screen x="70" y="27" width="948" height="1828" />
+    </state>
+    <state x="327" y="699" width="424" height="491" key="FileChooserDialogImpl/70.27.948.1828@70.27.948.1828" timestamp="1578184138769" />
+    <state width="964" height="516" key="GridCell.Tab.0.bottom" timestamp="1578187654968">
+      <screen x="70" y="27" width="1010" height="1788" />
     </state>
     <state width="1815" height="295" key="GridCell.Tab.0.bottom/62.0.1858.1080/1920.0.2560.1040@62.0.1858.1080" timestamp="1578007980675" />
-    <state width="1815" height="295" key="GridCell.Tab.0.center" timestamp="1578007980675">
-      <screen x="62" y="0" width="1858" height="1080" />
+    <state width="964" height="516" key="GridCell.Tab.0.bottom/70.27.1010.1788@70.27.1010.1788" timestamp="1578187654968" />
+    <state width="1742" height="254" key="GridCell.Tab.0.bottom/70.27.1788.988@70.27.1788.988" timestamp="1578157146100" />
+    <state width="902" height="530" key="GridCell.Tab.0.bottom/70.27.948.1828@70.27.948.1828" timestamp="1578167889406" />
+    <state width="964" height="516" key="GridCell.Tab.0.center" timestamp="1578187654965">
+      <screen x="70" y="27" width="1010" height="1788" />
     </state>
     <state width="1815" height="295" key="GridCell.Tab.0.center/62.0.1858.1080/1920.0.2560.1040@62.0.1858.1080" timestamp="1578007980675" />
-    <state width="1815" height="295" key="GridCell.Tab.0.left" timestamp="1578007980674">
-      <screen x="62" y="0" width="1858" height="1080" />
+    <state width="964" height="516" key="GridCell.Tab.0.center/70.27.1010.1788@70.27.1010.1788" timestamp="1578187654965" />
+    <state width="1742" height="254" key="GridCell.Tab.0.center/70.27.1788.988@70.27.1788.988" timestamp="1578157146098" />
+    <state width="902" height="530" key="GridCell.Tab.0.center/70.27.948.1828@70.27.948.1828" timestamp="1578167889405" />
+    <state width="964" height="516" key="GridCell.Tab.0.left" timestamp="1578187654965">
+      <screen x="70" y="27" width="1010" height="1788" />
     </state>
     <state width="1815" height="295" key="GridCell.Tab.0.left/62.0.1858.1080/1920.0.2560.1040@62.0.1858.1080" timestamp="1578007980674" />
-    <state width="1815" height="295" key="GridCell.Tab.0.right" timestamp="1578007980675">
-      <screen x="62" y="0" width="1858" height="1080" />
+    <state width="964" height="516" key="GridCell.Tab.0.left/70.27.1010.1788@70.27.1010.1788" timestamp="1578187654965" />
+    <state width="1742" height="254" key="GridCell.Tab.0.left/70.27.1788.988@70.27.1788.988" timestamp="1578157146097" />
+    <state width="902" height="530" key="GridCell.Tab.0.left/70.27.948.1828@70.27.948.1828" timestamp="1578167889404" />
+    <state width="964" height="516" key="GridCell.Tab.0.right" timestamp="1578187654968">
+      <screen x="70" y="27" width="1010" height="1788" />
     </state>
     <state width="1815" height="295" key="GridCell.Tab.0.right/62.0.1858.1080/1920.0.2560.1040@62.0.1858.1080" timestamp="1578007980675" />
-    <state x="80" y="339" key="SettingsEditor" timestamp="1578007980164">
-      <screen x="62" y="0" width="1858" height="1080" />
+    <state width="964" height="516" key="GridCell.Tab.0.right/70.27.1010.1788@70.27.1010.1788" timestamp="1578187654968" />
+    <state width="1742" height="254" key="GridCell.Tab.0.right/70.27.1788.988@70.27.1788.988" timestamp="1578157146098" />
+    <state width="902" height="530" key="GridCell.Tab.0.right/70.27.948.1828@70.27.948.1828" timestamp="1578167889406" />
+    <state x="87" y="278" width="1022" height="737" key="SettingsEditor" timestamp="1578090722866">
+      <screen x="70" y="27" width="1788" height="988" />
     </state>
     <state x="72" y="603" key="SettingsEditor/62.0.1018.1920/1080.620.2560.1040@62.0.1018.1920" timestamp="1577908689756" />
     <state x="80" y="339" key="SettingsEditor/62.0.1858.1080/1920.0.2560.1040@62.0.1858.1080" timestamp="1578007980164" />
-    <state x="267" y="785" key="com.intellij.ide.util.TipDialog" timestamp="1577908515938">
-      <screen x="62" y="0" width="1018" height="1920" />
+    <state x="87" y="278" width="1022" height="737" key="SettingsEditor/70.27.1788.988@70.27.1788.988" timestamp="1578090722866" />
+    <state x="261" y="774" key="com.intellij.ide.util.TipDialog" timestamp="1578165715739">
+      <screen x="70" y="27" width="948" height="1828" />
     </state>
     <state x="267" y="785" key="com.intellij.ide.util.TipDialog/62.0.1018.1920/1080.620.2560.1040@62.0.1018.1920" timestamp="1577908515938" />
+    <state x="430" y="431" key="com.intellij.ide.util.TipDialog/70.27.1788.988@70.27.1788.988" timestamp="1578147465769" />
+    <state x="261" y="774" key="com.intellij.ide.util.TipDialog/70.27.948.1828@70.27.948.1828" timestamp="1578165715739" />
+    <state x="186" y="517" width="778" height="807" key="find.popup" timestamp="1578186560781">
+      <screen x="70" y="27" width="1010" height="1788" />
+    </state>
+    <state x="186" y="517" width="778" height="807" key="find.popup/70.27.1010.1788@70.27.1010.1788" timestamp="1578186560781" />
   </component>
 </project>
