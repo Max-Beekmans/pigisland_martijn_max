@@ -498,6 +498,18 @@ kmint/pigisland/resources.hpp
 kmint/random.hpp
 /home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/kmint/random.hpp
 
+/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/resources.cpp
+kmint/pigisland/resources.hpp
+/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/kmint/pigisland/resources.hpp
+kmint/random.hpp
+/home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/kmint/random.hpp
+array
+-
+random
+-
+algorithm
+-
+
 /home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/shark.cpp
 kmint/pigisland/shark.hpp
 /home/osboxes/Documents/GitHub/pigisland_martijn_max/pigisland/src/kmint/pigisland/kmint/pigisland/shark.hpp

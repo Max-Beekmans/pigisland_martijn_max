@@ -133,6 +133,12 @@ public:
     std::for_each(begin(), end(), [](auto &n) { n.tag(node_tag::normal); });
   }
 
+  void reset_all_edges() {
+    std::for_each(begin(), end(), [](auto &n) {
+        n.resetEdges();
+    });
+  }
+
   [[deprecated]] void tag(node_iterator beginTagged, node_iterator endTagged) {
     untag_all();
     std::for_each(beginTagged, endTagged,

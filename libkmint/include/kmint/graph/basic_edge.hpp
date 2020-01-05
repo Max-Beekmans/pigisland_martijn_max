@@ -25,9 +25,9 @@ public:
 
     \param from the starting point of the edge
     \param to the destination of the edge
-    \param weight an optional weight (cost) associated with the edge (defaults to \a 1.0)
+    \param weight an optional weight (cost) associated with the edge (defaults to \a float max)
    */
-  basic_edge(node_type &from, node_type &to, float weight = 1.0f)
+  basic_edge(node_type &from, node_type &to, float weight = std::numeric_limits<float>::max())
       : from_{&from}, to_{&to}, weight_{weight} {}
   //! Returns a const reference to the destination node
   node_type const &to() const noexcept { return *to_; }
@@ -39,6 +39,8 @@ public:
   node_type &from() noexcept { return *from_; }
   //! Returns the weight associated with this edge
   float weight() const noexcept { return weight_; }
+  //! Sets weight to param
+  void setWeight(const float w) noexcept { weight_ = w; }
 
 private:
   node_type *from_;

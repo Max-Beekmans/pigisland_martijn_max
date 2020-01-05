@@ -107,6 +107,14 @@ public:
    * \param t the tag to assign to this node.
    */
   void tag(node_tag t) noexcept { tag_ = t; };
+  /*!
+   * Resets this nodes's edges back to default (INF)
+   */
+  void resetEdges() noexcept {
+      std::for_each(begin(), end(), [](auto &e) {
+          e.setWeight(std::numeric_limits<float>::max());
+      });
+  }
 
   friend class basic_graph<NodeInfo>;
 
