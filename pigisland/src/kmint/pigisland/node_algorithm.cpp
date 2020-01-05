@@ -2,6 +2,7 @@
 #include "kmint/random.hpp"
 #include <algorithm>
 #include <numeric>
+#include <iostream>
 
 namespace kmint {
     namespace pigisland {
@@ -47,19 +48,32 @@ namespace kmint {
 
         void find_path_astar(map::map_graph &g, map::map_node &start_node) {
             //list of node_id, distance pairs
-            std::vector<std::tuple<std::size_t, int16_t, bool>> nodes{};
+            std::vector<std::tuple<map::map_node&, int16_t, bool>> nodes{};
             //get all nodes into list and set all distances to max
             //except start_node is set to 0
             for (auto &i : g) {
-                int16_t val = std::numeric_limits<int16_t>::max();
-                if(i.node_id() == start_node.node_id()) { val = 0; }
-                nodes.emplace_back(i.node_id(), val, false);
+                nodes.emplace_back(i, std::numeric_limits<int16_t>::max(), false);
             }
-            //get node with shortest distance which is unvisited
-            auto res = std::min_element(begin(nodes), end(nodes), [](const auto& lhs, const auto& rhs) {
-                return (std::get<1>(lhs) < std::get<1>(rhs)) && !std::get<2>(lhs);
-            });
+            bool cont = true;
+            while(cont) {
+                //get node with shortest distance which is unvisited
+                auto res = std::min_element(begin(nodes), end(nodes), [](const auto& lhs, const auto& rhs) {
+                    return (std::get<1>(lhs) < std::get<1>(rhs)) && !std::get<2>(lhs);
+                });
+                auto node = nodes[nodes.end() - res];
 
+//                for(auto &e : std::get<0>(res)) {
+//                    //set node as visited
+//                    std::get<2>(res) = true;
+//                    std::get<1>(res)
+//                }
+                //check if all nodes are visited
+                //aka. all 3rd param of the tuples in nodes is true
+                for (auto &i : nodes) {
+                    if(!std::get<2>(i)) return;
+                    cont = false;
+                }
+            }
         }
 
 
