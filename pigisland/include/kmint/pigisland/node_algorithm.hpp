@@ -53,7 +53,7 @@ map::map_node const &find_closest_node_to(map::map_graph const &graph,
 ///
 /// Finds path the A* way and tags the nodes
 ///
-void find_path_astar(map::map_graph const &graph, math::vector2d target_location);
+void find_path_astar(map::map_graph &g, map::map_node &start_node);
 
 } // namespace pigisland
 } // namespace kmint

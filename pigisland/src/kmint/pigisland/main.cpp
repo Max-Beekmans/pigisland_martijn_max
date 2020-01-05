@@ -33,6 +33,7 @@ int main() {
   s.build_actor<play::map_actor>(math::vector2d{0.f, 0.f}, map.graph());
   s.build_actor<pigisland::boat>(graph,
                                  pigisland::find_node_of_kind(graph, '1'));
+  //TODO change back to shark rest
   s.build_actor<pigisland::shark>(graph,
                                   pigisland::find_node_of_kind(graph, 'K'));
 

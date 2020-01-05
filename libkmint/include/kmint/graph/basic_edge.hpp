@@ -39,8 +39,6 @@ public:
   node_type &from() noexcept { return *from_; }
   //! Returns the weight associated with this edge
   float weight() const noexcept { return weight_; }
-  //! Sets weight to param
-  void setWeight(const float w) noexcept { weight_ = w; }
 
 private:
   node_type *from_;

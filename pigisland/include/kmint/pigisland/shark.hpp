@@ -23,7 +23,7 @@ public:
   bool perceptive() const override { return true; }
   // geeft het bereik aan waarbinnen een haai
   // andere actors kan waarnemen.
-  scalar perception_range() const override { return 100.f; }
+  scalar perception_range() const override { return 200.f; }
 protected:
     std::string name() const override { return std::string("shark"); }
 private:
@@ -31,6 +31,7 @@ private:
   delta_time t_passed_{};
   // weet hoe de koe getekend moet worden
   play::image_drawable drawable_;
+  map::map_graph &graph_;
 };
 
 } // namespace pigisland
