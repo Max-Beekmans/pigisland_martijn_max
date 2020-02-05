@@ -6,9 +6,9 @@ namespace kmint::play {
 
 void image_drawable::draw(ui::frame &f) const {
   if (tinted_) {
-    f.draw_image(actor_->getLocation(), image_, tint_);
+    f.draw_image(actor_->location(), image_, tint_);
   } else {
-    f.draw_image(actor_->getLocation(), image_);
+    f.draw_image(actor_->location(), image_);
   }
 }
 

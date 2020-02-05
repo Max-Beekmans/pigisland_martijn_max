@@ -6,13 +6,6 @@ project(libkmint
         
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if(NOT DEFINED SDL2_DIR)
-  set(SDL2_DIR "C:/SDL2")
-endif()
-if(NOT DEFINED SDL2_IMAGE_DIR)
-  set(SDL2_IMAGE_DIR "C:/SDL2_image")
-endif(NOT DEFINED SDL2_IMAGE_DIR)
-
 if(MSVC)
   add_compile_options(/W3)
 

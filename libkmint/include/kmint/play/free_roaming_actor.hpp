@@ -10,10 +10,10 @@ namespace kmint::play {
 class free_roaming_actor : public actor {
 public:
   free_roaming_actor(math::vector2d location) : actor{}, location_{location} {}
-  math::vector2d getLocation() const override { return location_; }
+  math::vector2d location() const override { return location_; }
 
 protected:
-  void setLocation(math::vector2d loc) { location_ = loc; }
+  void location(math::vector2d loc) { location_ = loc; }
 
 private:
   math::vector2d location_;
