@@ -35,7 +35,7 @@ public:
     \param a the actor to add
   */
   void add(actor &a) {
-    if (!contains(area_, a.getLocation()))
+    if (!contains(area_, a.location()))
       return;
     auto next =
         std::visit(overload{[&](free &f) -> std::optional<saturated> {
@@ -84,7 +84,7 @@ public:
                           for (std::size_t i{0}; i < f.n; ++i) {
                             auto *a = f.actors[i];
 
-                            if (contains(bounds, a->getLocation())) {
+                            if (contains(bounds, a->location())) {
 
                               *destination++ = f.actors[i];
                             }
@@ -126,8 +126,8 @@ private:
   }
   std::size_t index_for(actor &a) {
     auto c = math::center(area_);
-    auto x = a.getLocation().x();
-    auto y = a.getLocation().y();
+    auto x = a.location().x();
+    auto y = a.location().y();
     if (y <= c.y()) {
       if (x <= c.x()) {
         return 1;

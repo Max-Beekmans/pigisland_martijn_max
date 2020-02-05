@@ -20,7 +20,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${INSTALL_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${INSTALL_DIR})
 
 add_subdirectory(libkmint)
-add_subdirectory(pigisland)
+add_subdirectory(ufo)
 if(MSVC)
   list(GET SDL2_LIBRARIES 0 HEAD_SDL2_LIBRARIES)
   get_filename_component(SDL2_DLL_DIR ${HEAD_SDL2_LIBRARIES} DIRECTORY CACHE)
@@ -31,6 +31,5 @@ if(MSVC)
 
 
   add_custom_target(dependencies ALL
-	#SOURCES kmintapp/resources/cow.png kmintapp/resources/rabbit.png kmintapp/resources/map3.png
     COMMAND ${CMAKE_COMMAND} -E copy ${SDL2_DLLS} ${SDL2_IMAGE_DLLS} ${INSTALL_DIR})
 endif(MSVC)
