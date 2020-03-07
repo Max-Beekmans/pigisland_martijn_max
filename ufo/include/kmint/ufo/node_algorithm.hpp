@@ -2,39 +2,57 @@
 #define UFO_NODE_ALGORITHM_HPP
 
 #include "kmint/map/map.hpp"
-namespace kmint {
-namespace ufo {
 
-///
-/// Gets the number of periods for which an entity has to wait before
-/// it can move to an adjacent node
-///
-double waiting_time(map::map_node const &node);
+namespace kmint::ufo {
+    ///
+    /// Represents possible heuristics able to be calculated
+    ///
+    enum Heuristic {
+        MANHATTAN, DIAGONAL, EUCLIDEAN
+    };
 
-///
-/// Finds a random node adjacent to argument node
-///
-map::map_node const &random_adjacent_node(map::map_node const &node);
+    ///
+    /// Gets the number of periods for which an entity has to wait before
+    /// it can move to an adjacent node
+    ///
+    double waiting_time(map::map_node const &node);
 
-///
-/// Finds a node of a given kind (which is the character by which it is
-/// represented textually)
-///
-/// You must take care that a node of the given kind exists. Otherwise the
-/// behaviour of this function is undefined.
-///
-map::map_node const &find_node_of_kind(map::map_graph const &graph, char kind);
+    ///
+    /// Finds a random node adjacent to argument node
+    ///
+    map::map_node const &random_adjacent_node(map::map_node const &node);
 
-map::map_node &random_node_of_kind(map::map &map, char kind);
-map::map_node const &random_node_of_kind(map::map const &map, char kind);
+    ///
+    /// Finds a node of a given kind (which is the character by which it is
+    /// represented textually)
+    ///
+    /// You must take care that a node of the given kind exists. Otherwise the
+    /// behaviour of this function is undefined.
+    ///
+    map::map_node &find_node_of_kind(map::map_graph const &graph, char kind);
 
-///
-/// Finds the closest node to a location
-///
-map::map_node const &find_closest_node_to(map::map_graph const &graph,
-                                          math::vector2d location);
+    map::map_node &random_node_of_kind(map::map &map, char kind);
 
-} // namespace ufo
-} // namespace kmint
+    map::map_node const &random_node_of_kind(map::map const &map, char kind);
+
+    ///
+    /// Finds the closest node to a location
+    ///
+    map::map_node const &find_closest_node_to(map::map_graph const &graph, math::vector2d location);
+
+    /// Calculate heuristic using method h
+    /// \param h heuristic calculation method
+    /// \param x current x position
+    /// \param y current y position
+    /// \param goal_x goal x position
+    /// \param goal_y goal y position
+    /// \return calculated heuristic as float
+    float calculate_heuristic(Heuristic h, float x, float y, float goal_x = -1, float goal_y = -1);
+
+    float calculate_heuristic(Heuristic h, map::map_node const &loc, map::map_node const &destLoc);
+
+    void tag_shortest_path_astar(Heuristic h, map::map_node const &actorLoc, map::map_node const &goalLoc, map::map_graph &graph);
+
+} // namespace kmint::ufo
 
 #endif /* UFO_NODE_ALGORITHM_HPP */

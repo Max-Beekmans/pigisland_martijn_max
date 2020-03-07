@@ -20,7 +20,7 @@ int play() {
   // een app object is nodig om
   ui::app app{};
 
-  //  maak een venster aan
+  // maak een venster aan
   ui::window window{app.create_window({1024, 768}, "kmint", 1.0)};
 
   // maak een podium aan

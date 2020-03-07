@@ -1,4 +1,4 @@
-C:\Users\MaxBe\.CLion2019.3\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/MaxBe/Documents/GitHub/pigisland_martijn_max
+/home/osboxes/Downloads/clion-2019.3.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/osboxes/CLionProjects/ufo_martijn_max
 CMake Warning (dev) in CMakeLists.txt:
   No project() command is present.  The top-level CMakeLists.txt file must
   contain a literal, direct call to the project() command.  Add a line of
@@ -12,57 +12,23 @@ CMake Warning (dev) in CMakeLists.txt:
   line.
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
--- The C compiler identification is GNU 7.4.0
--- The CXX compiler identification is GNU 7.4.0
-CMake Warning at /cygdrive/c/Users/MaxBe/.CLion2019.3/system/cygwin_cmake/share/cmake-3.15.3/Modules/Platform/CYGWIN.cmake:15 (message):
-  CMake no longer defines WIN32 on Cygwin!
-
-  (1) If you are just trying to build this project, ignore this warning or
-  quiet it by setting CMAKE_LEGACY_CYGWIN_WIN32=0 in your environment or in
-  the CMake cache.  If later configuration or build errors occur then this
-  project may have been written under the assumption that Cygwin is WIN32.
-  In that case, set CMAKE_LEGACY_CYGWIN_WIN32=1 instead.
-
-  (2) If you are developing this project, add the line
-
-    set(CMAKE_LEGACY_CYGWIN_WIN32 0) # Remove when CMake >= 2.8.4 is required
-
-  at the top of your top-level CMakeLists.txt file or set the minimum
-  required version of CMake to 2.8.4 or higher.  Then teach your project to
-  build on Cygwin without WIN32.
-Call Stack (most recent call first):
-  /cygdrive/c/Users/MaxBe/.CLion2019.3/system/cygwin_cmake/share/cmake-3.15.3/Modules/CMakeSystemSpecificInformation.cmake:26 (include)
-
-
+-- The C compiler identification is GNU 9.2.1
+-- The CXX compiler identification is GNU 9.2.1
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
 -- Detecting C compile features
 -- Detecting C compile features - done
--- Check for working CXX compiler: /usr/bin/c++.exe
--- Check for working CXX compiler: /usr/bin/c++.exe -- works
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Found PkgConfig: /usr/bin/pkg-config (found version "1.6.0") 
-CMake Error at libkmint/CMakeLists.txt:23 (find_package):
-  By not providing "FindSDL2.cmake" in CMAKE_MODULE_PATH this project has
-  asked CMake to find a package configuration file provided by "SDL2", but
-  CMake did not find one.
-
-  Could not find a package configuration file provided by "SDL2" with any of
-  the following names:
-
-    SDL2Config.cmake
-    sdl2-config.cmake
-
-  Add the installation prefix of "SDL2" to CMAKE_PREFIX_PATH or set
-  "SDL2_DIR" to a directory containing one of the above files.  If "SDL2"
-  provides a separate development package or SDK, be sure it has been
-  installed.
-
-
--- Configuring incomplete, errors occurred!
-See also "/cygdrive/c/Users/MaxBe/Documents/GitHub/pigisland_martijn_max/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+-- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.1") 
+-- Checking for module 'SDL2_image'
+--   Found SDL2_image, version 2.0.5
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/osboxes/CLionProjects/ufo_martijn_max/cmake-build-debug

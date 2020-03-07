@@ -1,24 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Project" targetName="ufo-common" />
+      <config projectName="Project" targetName="kmint" />
+      <config projectName="Project" targetName="ufo" />
+      <config projectName="Project" targetName="ufo-resources" />
+    </generated>
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b4f9a785-2140-4d95-9de1-688f416c4316" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeCXXCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeRCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeSystem.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeSystem.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdC/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdCXX/a.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libkmint/include/kmint/graph/basic_node.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/libkmint/include/kmint/graph/basic_node.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ufo/include/kmint/ufo/node_algorithm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/include/kmint/ufo/node_algorithm.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ufo/include/kmint/ufo/tank.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/include/kmint/ufo/tank.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ufo/src/kmint/ufo/node_algorithm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/src/kmint/ufo/node_algorithm.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ufo/src/kmint/ufo/play.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/src/kmint/ufo/play.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ufo/src/kmint/ufo/tank.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/src/kmint/ufo/tank.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="OCResolveContextSettings">
+    <option name="configuration" value="0-Debug-ufo-common" />
+  </component>
   <component name="ProjectId" id="1XNpsIgfiA5AtrghMkJFKLyYdn7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="cf.advertisement.text.has.clang-format" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
+  <component name="RunManager" selected="CMake Application.ufo">
+    <configuration name="kmint" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="kmint" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ufo-common" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="ufo-common" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ufo-resources" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project" TARGET_NAME="ufo-resources" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ufo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project" RUN_TARGET_NAME="ufo" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.kmint" />
+      <item itemvalue="CMake Application.ufo" />
+      <item itemvalue="CMake Application.ufo-common" />
+      <item itemvalue="CMake Application.ufo-resources" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b4f9a785-2140-4d95-9de1-688f416c4316" name="Default Changelist" comment="" />
+      <created>1583412823718</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583412823718</updated>
+      <workItem from="1583412825599" duration="12421000" />
+      <workItem from="1583490230098" duration="31730000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="422" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583425288937">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state x="422" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.1788.988@70.27.1788.988" timestamp="1583425288937" />
+    <state width="483" height="568" key="DebuggerActiveHint" timestamp="1583534557151">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state width="483" height="568" key="DebuggerActiveHint/70.27.1788.988@70.27.1788.988" timestamp="1583534557151" />
     <state x="473" y="296" key="FileChooserDialogImpl" timestamp="1580896621633">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state x="473" y="296" key="FileChooserDialogImpl/62.0.1858.1080/1920.0.2560.1040@62.0.1858.1080" timestamp="1580896621633" />
-    <state x="390" y="365" key="com.intellij.ide.util.TipDialog" timestamp="1580896615799">
-      <screen x="62" y="0" width="1858" height="1080" />
+    <state width="1742" height="314" key="GridCell.Tab.0.bottom" timestamp="1583534541098">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state width="1742" height="314" key="GridCell.Tab.0.bottom/70.27.1788.988@70.27.1788.988" timestamp="1583534541098" />
+    <state width="1742" height="314" key="GridCell.Tab.0.center" timestamp="1583534541097">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state width="1742" height="314" key="GridCell.Tab.0.center/70.27.1788.988@70.27.1788.988" timestamp="1583534541097" />
+    <state width="1742" height="314" key="GridCell.Tab.0.left" timestamp="1583534541097">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state width="1742" height="314" key="GridCell.Tab.0.left/70.27.1788.988@70.27.1788.988" timestamp="1583534541097" />
+    <state width="1742" height="314" key="GridCell.Tab.0.right" timestamp="1583534541097">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state width="1742" height="314" key="GridCell.Tab.0.right/70.27.1788.988@70.27.1788.988" timestamp="1583534541097" />
+    <state width="1742" height="314" key="GridCell.Tab.1.bottom" timestamp="1583534542968">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state width="1742" height="314" key="GridCell.Tab.1.bottom/70.27.1788.988@70.27.1788.988" timestamp="1583534542968" />
+    <state width="1742" height="314" key="GridCell.Tab.1.center" timestamp="1583534542967">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state width="1742" height="314" key="GridCell.Tab.1.center/70.27.1788.988@70.27.1788.988" timestamp="1583534542967" />
+    <state width="1742" height="314" key="GridCell.Tab.1.left" timestamp="1583534542966">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state width="1742" height="314" key="GridCell.Tab.1.left/70.27.1788.988@70.27.1788.988" timestamp="1583534542966" />
+    <state width="1742" height="314" key="GridCell.Tab.1.right" timestamp="1583534542967">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state width="1742" height="314" key="GridCell.Tab.1.right/70.27.1788.988@70.27.1788.988" timestamp="1583534542967" />
+    <state x="386" y="361" key="com.intellij.ide.util.TipDialog" timestamp="1583490245986">
+      <screen x="70" y="27" width="1788" height="988" />
     </state>
     <state x="390" y="365" key="com.intellij.ide.util.TipDialog/62.0.1858.1080/1920.0.2560.1040@62.0.1858.1080" timestamp="1580896615799" />
+    <state x="386" y="361" key="com.intellij.ide.util.TipDialog/70.27.1788.988@70.27.1788.988" timestamp="1583490245986" />
+    <state x="610" y="87" width="866" height="867" key="find.popup" timestamp="1583439981886">
+      <screen x="70" y="27" width="1788" height="988" />
+    </state>
+    <state x="610" y="87" width="866" height="867" key="find.popup/70.27.1788.988@70.27.1788.988" timestamp="1583439981886" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/ufo/src/kmint/ufo/tank.cpp</url>
+          <line>32</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

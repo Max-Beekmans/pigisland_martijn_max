@@ -17,8 +17,7 @@ namespace graph {
  */
 enum class node_tag {
   normal,  /**< default tag for a node */
-  visited, /**< indicates the node belongs to the closed set of a path finding
-              algoritm */
+  visited, /**< indicates the node belongs to the closed set of a path finding algorithm */
   path     /**< indicates a node belongs to a path */
 };
 template <typename NodeInfo> class basic_graph;
@@ -92,7 +91,7 @@ public:
    *
    * This function is provided solely for backwards compatibility reasons.
    * Passing false will set this node's tag to node_tag::normal. Passing true
-   * will set this node's tag to node_tag::visisted
+   * will set this node's tag to node_tag::visited
    *
    */
   [[deprecated]] void tagged(bool t) noexcept {
