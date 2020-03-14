@@ -4,9 +4,9 @@
 #include "kmint/map/map.hpp"
 #include "kmint/play.hpp"
 #include "kmint/primitives.hpp"
+#include "node_algorithm.hpp"
 
-namespace kmint {
-    namespace ufo {
+namespace kmint::ufo {
 
         enum class tank_type {
             red, green
@@ -40,9 +40,9 @@ namespace kmint {
             play::image_drawable drawable_;
             delta_time t_since_move_{};
             tank_type type_;
+            PathWrapper* path_{};
         };
 
-    } // namespace ufo
-} // namespace kmint
+    } // namespace kmint
 
 #endif /* KMINT_UFO_TANK_HPP */
