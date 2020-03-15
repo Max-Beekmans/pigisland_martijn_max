@@ -7,17 +7,23 @@
 namespace kmint::play {
 /*! \brief Base class for actors that can move freely across the stage.
  */
-class free_roaming_actor : public actor {
-public:
-  free_roaming_actor(math::vector2d location) : actor{}, location_{location} {}
-  math::vector2d location() const override { return location_; }
+    class free_roaming_actor : public actor {
+    public:
+        free_roaming_actor(math::vector2d location) : actor{}, location_{location} {}
 
-protected:
-  void location(math::vector2d loc) { location_ = loc; }
+        math::vector2d location() const override { return location_; }
 
-private:
-  math::vector2d location_;
-};
+        bool collidesWithScreen() const {
+            math::rectangle boundRect = {{0 + collision_range(), 0 + collision_range()}, {1024 - collision_range(), 768  - collision_range()}};
+            return !math::contains(boundRect, location());
+        }
+
+    protected:
+        void location(math::vector2d loc) { location_ = loc; }
+
+    private:
+        math::vector2d location_;
+    };
 } // namespace kmint::play
 
 #endif

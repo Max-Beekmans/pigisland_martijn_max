@@ -6,6 +6,7 @@
 #include "kmint/ufo/resources.hpp"
 #include "kmint/ufo/saucer.hpp"
 #include "kmint/ufo/tank.hpp"
+#include "kmint/ufo/door.hpp"
 #include "kmint/ufo/node_algorithm.hpp"
 #include "kmint/ui.hpp"
 #include <algorithm>
@@ -13,6 +14,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include <kmint/ufo/building.hpp>
 
 namespace kmint::ufo {
 
@@ -37,6 +39,19 @@ int play() {
     s.build_actor<ufo::human>();
   }
 
+  s.build_actor<ufo::building>(math::vector2d {576, 64}, math::size{80, 48}); //row 1, building 1
+  s.build_actor<ufo::building>(math::vector2d {624, 64}, math::size{112, 62}); //row 1, building 2
+  s.build_actor<ufo::building>(math::vector2d {576, 208}, math::size{96, 112}); //row 2, building 1
+  s.build_actor<ufo::building>(math::vector2d {320, 512}, math::size{112, 128}); //row 3, building 1
+  s.build_actor<ufo::building>(math::vector2d {432, 464}, math::size{80, 160}); //row 3, building 2
+  s.build_actor<ufo::building>(math::vector2d {576, 400}, math::size{112, 96}); //row 3, building 3
+
+  s.build_actor<ufo::door>(math::vector2d {600 , 137}); //row 1, building 1
+  s.build_actor<ufo::door>(math::vector2d {688 , 119}); //row 1, building 2
+  s.build_actor<ufo::door>(math::vector2d {625 , 315}); //row 2, building 1
+  s.build_actor<ufo::door>(math::vector2d {401 , 634}); //row 3, building 1
+  s.build_actor<ufo::door>(math::vector2d {456 , 620}); //row 3, building 2
+  s.build_actor<ufo::door>(math::vector2d {641 , 491}); //row 3, building 3
 
   s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::red);
   s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::green);

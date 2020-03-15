@@ -64,6 +64,10 @@ public:
   actor &operator=(const actor &) = delete;
   actor &operator=(actor &&) = delete;
 
+  math::vector2d heading() const { return _heading; }
+  void heading(math::vector2d heading) {
+      _heading = heading;
+  }
   /*!
    * Called every tick
    * \param dt the time that has passed since the previous tick
@@ -98,7 +102,8 @@ public:
    * This function returns a square collision box centered at the
    * actors location
    */
-  math::rectangle collision_box() const {
+   //made virtual so building can have a non square collision box
+  virtual math::rectangle collision_box() const {
     return square_box_centered(collision_range());
   }
 
@@ -130,7 +135,6 @@ public:
    */
   virtual bool perceptive() const { return false; }
 
-  virtual math::vector2d heading() const { return {1.0, 0.0}; }
   virtual scalar perception_range() const { return {}; }
   //! Returns a box centered at this actor's location in which other actors can
   //! be seen
@@ -316,6 +320,7 @@ public:
     bool removed_{false};
     static actor &deref_actor(actor * ptr) { return *ptr; }
     static actor const &deref_actor_const(actor const *ptr) { return *ptr; }
+    math::vector2d _heading;
 
     math::rectangle square_box_centered(scalar dim) const {
       auto hdim = dim / 2;
@@ -323,7 +328,6 @@ public:
       return {{loc.x() - hdim, loc.y() - hdim}, {dim, dim}};
   }
 };
-
 
 /*!
  * Determine if two actors have collided

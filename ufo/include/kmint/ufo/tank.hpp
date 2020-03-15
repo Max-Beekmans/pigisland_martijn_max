@@ -16,6 +16,8 @@ namespace kmint {
         public:
             tank(map::map_graph &g, map::map_node &initial_node, tank_type t);
 
+            tank& operator=(tank &&) = default;
+
             // wordt elke game tick aangeroepen
             void act(delta_time dt) override;
 
@@ -34,6 +36,8 @@ namespace kmint {
             // geeft het bereik aan waarbinnen een tank
             // andere actors kan waarnemen.
             scalar perception_range() const override { return 200.f; }
+
+            tank_type type() const { return type_; }
 
         private:
             map::map_graph &graph_;

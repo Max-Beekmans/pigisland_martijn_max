@@ -83,9 +83,10 @@ public:
     std::visit(overload{[&](free const &f) {
                           for (std::size_t i{0}; i < f.n; ++i) {
                             auto *a = f.actors[i];
-
-                            if (contains(bounds, a->location())) {
-
+                            math::rectangle col = a->collision_box();
+                            if(intersect(bounds, col))
+                            //if (contains(bounds, a->location()))
+                            {
                               *destination++ = f.actors[i];
                             }
                           }

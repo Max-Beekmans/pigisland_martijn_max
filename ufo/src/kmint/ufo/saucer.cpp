@@ -64,6 +64,9 @@ saucer::saucer(saucer_type type)
 	  type_{type} {}
 
 void saucer::act(delta_time dt) {
+    if(collidesWithScreen()) {
+        v_ = v_ * -1;
+    }
   location(location() + v_ * to_seconds(dt));
   for (std::size_t ix{}; ix < num_colliding_actors(); ++ix) {
     auto &other = colliding_actor(ix);
