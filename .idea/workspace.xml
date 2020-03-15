@@ -2,10 +2,10 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="Project" targetName="ufo" />
-      <config projectName="Project" targetName="ufo-resources" />
       <config projectName="Project" targetName="ufo-common" />
       <config projectName="Project" targetName="kmint" />
+      <config projectName="Project" targetName="ufo" />
+      <config projectName="Project" targetName="ufo-resources" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -15,15 +15,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4f9a785-2140-4d95-9de1-688f416c4316" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ufo/include/kmint/ufo/NodeWrapper.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ufo/include/kmint/ufo/PathWrapper.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ufo/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ufo/include/kmint/ufo/node_algorithm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/include/kmint/ufo/node_algorithm.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ufo/include/kmint/ufo/tank.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/include/kmint/ufo/tank.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ufo/src/kmint/ufo/node_algorithm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/src/kmint/ufo/node_algorithm.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ufo/src/kmint/ufo/tank.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ufo/src/kmint/ufo/tank.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +95,9 @@
       <workItem from="1583412825599" duration="12421000" />
       <workItem from="1583490230098" duration="31730000" />
       <workItem from="1584004891748" duration="6335000" />
-      <workItem from="1584189667037" duration="19005000" />
+      <workItem from="1584189667037" duration="19370000" />
+      <workItem from="1584213448937" duration="352000" />
+      <workItem from="1584274769870" duration="9890000" />
     </task>
     <servers />
   </component>
@@ -113,67 +109,82 @@
       <screen x="70" y="27" width="1788" height="988" />
     </state>
     <state x="422" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.1788.988@70.27.1788.988" timestamp="1583425288937" />
-    <state width="483" height="568" key="DebuggerActiveHint" timestamp="1584212039276">
+    <state width="502" height="568" key="DebuggerActiveHint" timestamp="1584287379493">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state width="483" height="568" key="DebuggerActiveHint/70.27.1788.988@70.27.1788.988" timestamp="1584212039276" />
+    <state width="502" height="568" key="DebuggerActiveHint/70.27.1788.988@70.27.1788.988" timestamp="1584287379493" />
     <state x="473" y="296" key="FileChooserDialogImpl" timestamp="1580896621633">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state x="473" y="296" key="FileChooserDialogImpl/62.0.1858.1080/1920.0.2560.1040@62.0.1858.1080" timestamp="1580896621633" />
-    <state width="871" height="314" key="GridCell.Tab.0.bottom" timestamp="1584212867251">
+    <state width="1742" height="314" key="GridCell.Tab.0.bottom" timestamp="1584289031724">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state width="871" height="314" key="GridCell.Tab.0.bottom/70.27.1788.988@70.27.1788.988" timestamp="1584212867251" />
-    <state width="871" height="314" key="GridCell.Tab.0.center" timestamp="1584212867251">
+    <state width="1742" height="314" key="GridCell.Tab.0.bottom/70.27.1788.988@70.27.1788.988" timestamp="1584289031724" />
+    <state width="1742" height="314" key="GridCell.Tab.0.center" timestamp="1584289031724">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state width="871" height="314" key="GridCell.Tab.0.center/70.27.1788.988@70.27.1788.988" timestamp="1584212867251" />
-    <state width="871" height="314" key="GridCell.Tab.0.left" timestamp="1584212867250">
+    <state width="1742" height="314" key="GridCell.Tab.0.center/70.27.1788.988@70.27.1788.988" timestamp="1584289031724" />
+    <state width="1742" height="314" key="GridCell.Tab.0.left" timestamp="1584289031723">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state width="871" height="314" key="GridCell.Tab.0.left/70.27.1788.988@70.27.1788.988" timestamp="1584212867250" />
-    <state width="871" height="314" key="GridCell.Tab.0.right" timestamp="1584212867251">
+    <state width="1742" height="314" key="GridCell.Tab.0.left/70.27.1788.988@70.27.1788.988" timestamp="1584289031723" />
+    <state width="1742" height="314" key="GridCell.Tab.0.right" timestamp="1584289031724">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state width="871" height="314" key="GridCell.Tab.0.right/70.27.1788.988@70.27.1788.988" timestamp="1584212867251" />
-    <state width="871" height="314" key="GridCell.Tab.1.bottom" timestamp="1584212867193">
+    <state width="1742" height="314" key="GridCell.Tab.0.right/70.27.1788.988@70.27.1788.988" timestamp="1584289031724" />
+    <state width="1742" height="314" key="GridCell.Tab.1.bottom" timestamp="1584289033506">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state width="871" height="314" key="GridCell.Tab.1.bottom/70.27.1788.988@70.27.1788.988" timestamp="1584212867193" />
-    <state width="871" height="314" key="GridCell.Tab.1.center" timestamp="1584212867192">
+    <state width="1742" height="314" key="GridCell.Tab.1.bottom/70.27.1788.988@70.27.1788.988" timestamp="1584289033506" />
+    <state width="1742" height="314" key="GridCell.Tab.1.center" timestamp="1584289033506">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state width="871" height="314" key="GridCell.Tab.1.center/70.27.1788.988@70.27.1788.988" timestamp="1584212867192" />
-    <state width="871" height="314" key="GridCell.Tab.1.left" timestamp="1584212867192">
+    <state width="1742" height="314" key="GridCell.Tab.1.center/70.27.1788.988@70.27.1788.988" timestamp="1584289033506" />
+    <state width="1742" height="314" key="GridCell.Tab.1.left" timestamp="1584289033505">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state width="871" height="314" key="GridCell.Tab.1.left/70.27.1788.988@70.27.1788.988" timestamp="1584212867192" />
-    <state width="871" height="314" key="GridCell.Tab.1.right" timestamp="1584212867193">
+    <state width="1742" height="314" key="GridCell.Tab.1.left/70.27.1788.988@70.27.1788.988" timestamp="1584289033505" />
+    <state width="1742" height="314" key="GridCell.Tab.1.right" timestamp="1584289033506">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state width="871" height="314" key="GridCell.Tab.1.right/70.27.1788.988@70.27.1788.988" timestamp="1584212867193" />
+    <state width="1742" height="314" key="GridCell.Tab.1.right/70.27.1788.988@70.27.1788.988" timestamp="1584289033506" />
     <state x="453" y="156" width="1022" height="737" key="SettingsEditor" timestamp="1584189841965">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
     <state x="453" y="156" width="1022" height="737" key="SettingsEditor/70.27.1788.988@70.27.1788.988" timestamp="1584189841965" />
-    <state x="386" y="361" key="com.intellij.ide.util.TipDialog" timestamp="1584189677087">
+    <state x="386" y="361" key="com.intellij.ide.util.TipDialog" timestamp="1584275685003">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
     <state x="390" y="365" key="com.intellij.ide.util.TipDialog/62.0.1858.1080/1920.0.2560.1040@62.0.1858.1080" timestamp="1580896615799" />
-    <state x="386" y="361" key="com.intellij.ide.util.TipDialog/70.27.1788.988@70.27.1788.988" timestamp="1584189677087" />
-    <state x="610" y="87" width="866" height="867" key="find.popup" timestamp="1584191749689">
+    <state x="386" y="361" key="com.intellij.ide.util.TipDialog/70.27.1788.988@70.27.1788.988" timestamp="1584275685003" />
+    <state x="610" y="87" width="866" height="867" key="find.popup" timestamp="1584278363463">
       <screen x="70" y="27" width="1788" height="988" />
     </state>
-    <state x="610" y="87" width="866" height="867" key="find.popup/70.27.1788.988@70.27.1788.988" timestamp="1584191749689" />
+    <state x="610" y="87" width="866" height="867" key="find.popup/70.27.1788.988@70.27.1788.988" timestamp="1584278363463" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/ufo/src/kmint/ufo/node_algorithm.cpp</url>
-          <line>169</line>
+          <line>182</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/ufo/src/kmint/ufo/node_algorithm.cpp</url>
+          <line>166</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/ufo/src/kmint/ufo/node_algorithm.cpp</url>
+          <line>156</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/ufo/src/kmint/ufo/node_algorithm.cpp</url>
+          <line>165</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

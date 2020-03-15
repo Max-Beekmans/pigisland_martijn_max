@@ -8,6 +8,7 @@
 #include <queue>
 #include <stack>
 #include <utility>
+#include <cfloat>
 
 namespace kmint::ufo {
 
@@ -54,7 +55,7 @@ namespace kmint::ufo {
     float calculate_heuristic(Heuristic h, const float x, const float y, const float goal_x, const float goal_y) {
         switch (h) {
             case MANHATTAN: {
-                return std::abs(x) + std::abs(y);
+                return std::abs(x - goal_x) + std::abs(y - goal_y);
             }
             case DIAGONAL: {
                 if (goal_x < 0 || goal_y < 0) {
@@ -68,6 +69,9 @@ namespace kmint::ufo {
                 }
                 return std::sqrt(std::abs(x - goal_x) * 2 + std::abs(y - goal_y) * 2);
             }
+            case DIJKSTRA: {
+                return 0;
+            }
             default: {
                 return -1;
             }
@@ -79,8 +83,9 @@ namespace kmint::ufo {
                                    destLoc.location().y());
     }
 
-    void CreatePath(NodeWrapper* current, NodeWrapper* origin, std::vector<NodeWrapper*>& path, map::map_graph &graph) {
-        if(current == origin) {
+    void
+    CreatePath(NodeWrapper *current, NodeWrapper *origin, std::vector<NodeWrapper *> &path, map::map_graph &graph) {
+        if (current == origin) {
             return;
         }
         graph[current->getNode()->node_id()].tag(graph::node_tag::path);
@@ -89,11 +94,12 @@ namespace kmint::ufo {
     }
 
     /// tag the shortest path from actorLoc to goalLoc using our own implementation of A*
-    /// \param h. heuristic used to calculate distance between the current position and the goal position
-    /// \param actorLoc. starting map_node of search.
-    /// \param goalLoc. destination map_node of search
-    PathWrapper* tag_shortest_path_astar(Heuristic h, map::map_node const &actorLoc, map::map_node const &goalLoc,
-                                 map::map_graph &graph) {
+    /// \param heuristic used to calculate distance between the current position and the goal position.
+    /// \param actorLoc starting map_node of search.
+    /// \param goalLoc destination map_node of search
+    PathWrapper *
+    tag_shortest_path_astar(Heuristic heuristic, map::map_node const &actorLoc, map::map_node const &goalLoc,
+                            map::map_graph &graph) {
         graph.untag_all();
         //! With each assignment to the queue it will re-sort based on NodeWrapper.val
         std::deque<NodeWrapper *> openDeQueue{};
@@ -102,39 +108,38 @@ namespace kmint::ufo {
         //! This is my workaround. I know I break the holy const code but idc cause not undefined behaviour checkmate.</rant>
         //! What it does: takes the node_id from the const ref and pull it from the graph non-const with [] operator.
         auto *mutableActorLoc = &graph[actorLoc.node_id()];
-        auto* actorPtr = new NodeWrapper(0.0, mutableActorLoc, nullptr);
+        auto *actorPtr = new NodeWrapper(0.0, mutableActorLoc, nullptr);
         openDeQueue.emplace_back(actorPtr);
         while (!openDeQueue.empty()) {
+            //! Sort the DeQueue
+            std::sort(openDeQueue.begin(), openDeQueue.end());
             NodeWrapper *topPtr = openDeQueue.front();
             //! Same workaround as above
             auto &topNodeRef = graph[topPtr->getNode()->node_id()];
-            //! pop front node and tag as visited
             topNodeRef.tag(graph::node_tag::visited);
-            openDeQueue.pop_front();
-            auto it = std::find(closedList.begin(), closedList.end(), topPtr);
-            if(it == closedList.end()) {
-                closedList.emplace_back(topPtr);
-            }
             float dist = topPtr->getDist();
             for (auto &edge : topNodeRef) {
                 map::map_node &successor = edge.to();
                 //! Calculate new distance for successor
-                float newDist = dist + edge.weight() + calculate_heuristic(h, successor, goalLoc);
+                float h = calculate_heuristic(heuristic, successor, goalLoc);
+                if (h < 0) { return nullptr; }
+                float newDist = dist + edge.weight() + h;
                 auto *successorPtr = new NodeWrapper{newDist, &successor, topPtr};
                 //! Check if this edge leads to the goal node.
                 if (successor.node_id() == goalLoc.node_id()) {
-                    std::vector<NodeWrapper*> path{};
+                    std::vector<NodeWrapper *> path{};
                     CreatePath(successorPtr, actorPtr, path, graph);
-                    auto* pathWrapper = new PathWrapper{path};
+                    auto *pathWrapper = new PathWrapper{path};
 
                     for (auto c : openDeQueue) {
                         std::cout << *c << std::endl;
-                        if(c->getNode()->tag() != graph::node_tag::visited && c->getNode()->tag() != graph::node_tag::path) {
+                        if (c->getNode()->tag() != graph::node_tag::visited &&
+                            c->getNode()->tag() != graph::node_tag::path) {
                             delete c;
                         }
                     }
                     for (auto d : closedList) {
-                        if(d->getNode()->tag() != graph::node_tag::path) {
+                        if (d->getNode()->tag() != graph::node_tag::path) {
                             delete d;
                         }
                     }
@@ -145,30 +150,45 @@ namespace kmint::ufo {
                     continue;
                 }
                 //! Find successor in queue
-                auto it = std::find(openDeQueue.begin(), openDeQueue.end(), successorPtr);
+                //auto it = std::find(openDeQueue.begin(), openDeQueue.end(), successorPtr);
+                NodeWrapper* found = nullptr;
+                for(auto node : openDeQueue) {
+                    if (node->getNode()->node_id() == successorPtr->getNode()->node_id()) {
+                        found = node;
+                        break;
+                    }
+                }
+                if (found == nullptr) {
+                    openDeQueue.emplace_back(successorPtr);
+                } else {
+                    //! check the distance to the previous we have processed before
+                    //! adjust distance if the previous was higher
+                    if (found->getDist() > newDist) {
+                        found->setDist(newDist);
+                        found->setParent(topPtr);
+                    }
+                }
                 //! Check if we got an it pointing to the end
                 //! If successor IS in the queue it will point to it.
-                if (it == openDeQueue.end()) {
-                    //! Add successor and it's new distance to the openDeQueue
-                    openDeQueue.emplace_back(successorPtr);
-                }
-
-                //! check the distance to the previous we have processed before
-                //! adjust distance if the previous was higher
-                auto reVisitPtr = *it;
-                if (reVisitPtr->getDist() > newDist) {
-                    reVisitPtr->setDist(newDist);
-                    reVisitPtr->setParent(topPtr);
-                }
-                //! Sort the DeQueue
-                std::sort(openDeQueue.begin(), openDeQueue.end());
+//                if (it == openDeQueue.end()) {
+//                    //! Add successor and it's new distance to the openDeQueue
+//                    openDeQueue.emplace_back(successorPtr);
+//                    continue;
+//                }
             }
-
+            //! pop front node and tag as visited
+            openDeQueue.pop_front();
         }
         //! Failed to find goal
+        std::cout << "Fail: " << std::endl;
         for (auto c : openDeQueue) {
-            std::cout << "Fail: " << std::endl;
-            std::cout << c << std::endl;
+            std::cout << *c << std::endl;
+            if (c->getNode()->tag() != graph::node_tag::visited) {
+                delete c;
+            }
+        }
+        for (auto d : closedList) {
+            delete d;
         }
     }
-} // namespace kmint
+}// namespace kmint
