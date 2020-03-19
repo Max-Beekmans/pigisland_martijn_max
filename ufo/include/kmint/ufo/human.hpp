@@ -18,9 +18,16 @@ public:
   bool perceptive() const override { return true; }
   scalar perception_range() const override { return 100.f; }
   math::vector2d collisionWithBuildings() const;
+  bool isDead() const;
+  bool isSafe() const;
+  int getFitness() const;
+  void setFitness(int fitness);
 private:
   play::image_drawable drawable_;
   int velocity_;
+  bool isDead_;
+  bool isSafe_;
+  int fitness_;
 };
 
 } // namespace kmint::ufo

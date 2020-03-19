@@ -19,6 +19,8 @@ add_library(ufo-common STATIC
   src/kmint/ufo/saucer.cpp
   src/kmint/ufo/building.cpp
   src/kmint/ufo/human.cpp
+  src/kmint/ufo/population.cpp
+  src/kmint/ufo/dna_string.cpp
   src/kmint/ufo/node_algorithm.cpp
   src/kmint/ufo/play.cpp)
 

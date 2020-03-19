@@ -24,6 +24,22 @@ human::human()
 	velocity_{20}{
 }
 
+bool human::isDead() const {
+    return isDead_;
+}
+
+bool human::isSafe() const {
+    return isSafe_;
+}
+
+int human::getFitness() const {
+    return fitness_;
+}
+
+void human::setFitness(int fitness) {
+    fitness_ = fitness;
+}
+
 void human::act(delta_time dt) {
     math::vector2d forceVector = {0,0};
     math::vector2d alignmentVector = {0,0};
