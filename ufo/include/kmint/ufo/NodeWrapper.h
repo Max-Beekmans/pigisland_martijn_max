@@ -50,7 +50,8 @@ namespace kmint::ufo {
         }
 
     private:
-        float val_ = MAXFLOAT;
+
+        float val_ = FLT_MAX;
         map::map_node *node_;
         NodeWrapper *parent_;
     };

@@ -52,6 +52,8 @@ namespace kmint::ufo {
 
     double waiting_time(map::map_node const &node) { return node[0].weight(); }
 
+
+
     float calculate_heuristic(Heuristic h, const float x, const float y, const float goal_x, const float goal_y) {
         switch (h) {
             case MANHATTAN: {
@@ -102,18 +104,18 @@ namespace kmint::ufo {
                             map::map_graph &graph) {
         graph.untag_all();
         //! With each assignment to the queue it will re-sort based on NodeWrapper.val
-        std::deque<NodeWrapper *> openDeQueue{};
+        std::vector<NodeWrapper *> openList{};
         std::vector<NodeWrapper *> closedList{};
         //! <rant>I dislike the way you have to get a non-const reference (and I have to since I want to use tag) from the kmint framework
         //! This is my workaround. I know I break the holy const code but idc cause not undefined behaviour checkmate.</rant>
         //! What it does: takes the node_id from the const ref and pull it from the graph non-const with [] operator.
         auto *mutableActorLoc = &graph[actorLoc.node_id()];
         auto *actorPtr = new NodeWrapper(0.0, mutableActorLoc, nullptr);
-        openDeQueue.emplace_back(actorPtr);
-        while (!openDeQueue.empty()) {
+        openList.emplace_back(actorPtr);
+        while (!openList.empty()) {
             //! Sort the DeQueue
-            std::sort(openDeQueue.begin(), openDeQueue.end());
-            NodeWrapper *topPtr = openDeQueue.front();
+            std::sort(openList.begin(), openList.end());
+            NodeWrapper *topPtr = openList.front();
             //! Same workaround as above
             auto &topNodeRef = graph[topPtr->getNode()->node_id()];
             topNodeRef.tag(graph::node_tag::visited);
@@ -131,7 +133,7 @@ namespace kmint::ufo {
                     CreatePath(successorPtr, actorPtr, path, graph);
                     auto *pathWrapper = new PathWrapper{path};
 
-                    for (auto c : openDeQueue) {
+                    for (auto c : openList) {
                         std::cout << *c << std::endl;
                         if (c->getNode()->tag() != graph::node_tag::visited &&
                             c->getNode()->tag() != graph::node_tag::path) {
@@ -150,16 +152,16 @@ namespace kmint::ufo {
                     continue;
                 }
                 //! Find successor in queue
-                //auto it = std::find(openDeQueue.begin(), openDeQueue.end(), successorPtr);
+                //auto it = std::find(openList.begin(), openList.end(), successorPtr);
                 NodeWrapper* found = nullptr;
-                for(auto node : openDeQueue) {
+                for(auto node : openList) {
                     if (node->getNode()->node_id() == successorPtr->getNode()->node_id()) {
                         found = node;
                         break;
                     }
                 }
                 if (found == nullptr) {
-                    openDeQueue.emplace_back(successorPtr);
+                    openList.emplace_back(successorPtr);
                 } else {
                     //! check the distance to the previous we have processed before
                     //! adjust distance if the previous was higher
@@ -170,18 +172,18 @@ namespace kmint::ufo {
                 }
                 //! Check if we got an it pointing to the end
                 //! If successor IS in the queue it will point to it.
-//                if (it == openDeQueue.end()) {
-//                    //! Add successor and it's new distance to the openDeQueue
-//                    openDeQueue.emplace_back(successorPtr);
+//                if (it == openList.end()) {
+//                    //! Add successor and it's new distance to the openList
+//                    openList.emplace_back(successorPtr);
 //                    continue;
 //                }
             }
             //! pop front node and tag as visited
-            openDeQueue.pop_front();
+            openList.erase(openList.);
         }
         //! Failed to find goal
         std::cout << "Fail: " << std::endl;
-        for (auto c : openDeQueue) {
+        for (auto c : openList) {
             std::cout << *c << std::endl;
             if (c->getNode()->tag() != graph::node_tag::visited) {
                 delete c;
