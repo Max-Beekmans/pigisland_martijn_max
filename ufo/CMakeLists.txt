@@ -1,6 +1,6 @@
 # Author: Jeroen de Haas <jah.dehaas@avans.nl>
 cmake_minimum_required(VERSION 3.1.3)
-project(pigisland)
+project(ufo)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(MSVC)

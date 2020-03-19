@@ -46,7 +46,7 @@ namespace kmint::ufo {
                       << nodeWrapper.getParent()->getNode()->node_id() << "]: " << nodeWrapper.fCost();
         }
 
-        float gCost = FLT_MAX;
+        float gCost = MAXFLOAT;
         float hCost = 0;
     private:
         map::map_node *node_;

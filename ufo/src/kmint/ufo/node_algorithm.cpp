@@ -69,9 +69,9 @@ namespace kmint::ufo {
     }
 
     NodeWrapper *findNode(NodeWrapper* node, std::vector<NodeWrapper *> &openList) {
-        for(auto node : openList) {
-            if (node->getNode()->node_id() == node->getNode()->node_id()) {
-                return node;
+        for(auto i : openList) {
+            if (i->getNode()->node_id() == node->getNode()->node_id()) {
+                return i;
             }
         }
         return nullptr;
@@ -184,7 +184,7 @@ namespace kmint::ufo {
                 if (successor.tag() == graph::node_tag::visited) {
                     continue;
                 }
-                //! Find successor in queue
+                //! Find successor on openList
                 NodeWrapper* found = findNode(successorPtr, openList);
                 if (found == nullptr) {
                     openList.emplace_back(successorPtr);
