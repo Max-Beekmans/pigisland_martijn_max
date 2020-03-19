@@ -7,6 +7,8 @@
 #include <set>
 #include <queue>
 #include <stack>
+#include <utility>
+#include <cfloat>
 
 namespace kmint::ufo {
 
@@ -50,10 +52,12 @@ namespace kmint::ufo {
 
     double waiting_time(map::map_node const &node) { return node[0].weight(); }
 
+
+
     float calculate_heuristic(Heuristic h, const float x, const float y, const float goal_x, const float goal_y) {
         switch (h) {
             case MANHATTAN: {
-                return std::abs(x) + std::abs(y);
+                return std::abs(x - goal_x) + std::abs(y - goal_y);
             }
             case DIAGONAL: {
                 if (goal_x < 0 || goal_y < 0) {
@@ -67,6 +71,9 @@ namespace kmint::ufo {
                 }
                 return std::sqrt(std::abs(x - goal_x) * 2 + std::abs(y - goal_y) * 2);
             }
+            case DIJKSTRA: {
+                return 0;
+            }
             default: {
                 return -1;
             }
@@ -74,100 +81,116 @@ namespace kmint::ufo {
     }
 
     float calculate_heuristic(Heuristic h, map::map_node const &loc, map::map_node const &destLoc) {
-        return calculate_heuristic(h, loc.location().x(), loc.location().y(), destLoc.location().x(), destLoc.location().y());
+        return calculate_heuristic(h, loc.location().x(), loc.location().y(), destLoc.location().x(),
+                                   destLoc.location().y());
     }
 
-    /// Struct to wrap a node together with a double to hold the distance to this node.
-    /// Provides comparative operator overloads to compare struct
-    struct NodeWrapper {
-    public:
-
-        NodeWrapper(const float val, map::map_node &node, map::map_node &parent):
-            val_(val), node_(&node), parent_(&parent) {}
-
-        NodeWrapper(const float val, map::map_node *node, map::map_node *parent):
-            val_(val), node_(node), parent_(parent) {}
-
-        void setDist(const float dist) { val_ = dist; }
-        float getDist() const { return val_; }
-        map::map_node *getNode() const { return node_; }
-        void setParent(map::map_node &parent) { parent_ = &parent; }
-        map::map_node *getParent() const { return parent_; }
-
-        friend bool operator < (const NodeWrapper& lhs, const NodeWrapper& rhs) {
-            return lhs.getDist() < rhs.getDist();
+    void
+    CreatePath(NodeWrapper *current, NodeWrapper *origin, std::vector<NodeWrapper *> &path, map::map_graph &graph) {
+        if (current == origin) {
+            return;
         }
+        graph[current->getNode()->node_id()].tag(graph::node_tag::path);
+        path.emplace_back(current);
+        CreatePath(current->getParent(), origin, path, graph);
+    }
 
-        friend bool operator > (const NodeWrapper& lhs, const NodeWrapper& rhs) {
-            return lhs.getDist() > rhs.getDist();
-        }
-
-        friend bool operator == (const NodeWrapper& lhs, const NodeWrapper& rhs) {
-            return (lhs.getNode() == rhs.getNode());
-        }
-
-        friend std::ostream& operator << (std::ostream& os, const NodeWrapper& nodeWrapper) {
-            return os << "Distance to node[" << nodeWrapper.getNode()->node_id() << "]: " << nodeWrapper.getDist();
-        }
-
-    private:
-        float val_;
-        map::map_node *node_;
-        map::map_node *parent_;
-    };
     /// tag the shortest path from actorLoc to goalLoc using our own implementation of A*
-    /// \param h. heuristic used to calculate distance between the current position and the goal position
-    /// \param actorLoc. starting map_node of search.
-    /// \param goalLoc. destination map_node of search
-    void tag_shortest_path_astar(Heuristic h, map::map_node const &actorLoc, map::map_node const &goalLoc, map::map_graph &graph) {
+    /// \param heuristic used to calculate distance between the current position and the goal position.
+    /// \param actorLoc starting map_node of search.
+    /// \param goalLoc destination map_node of search
+    PathWrapper *
+    tag_shortest_path_astar(Heuristic heuristic, map::map_node const &actorLoc, map::map_node const &goalLoc,
+                            map::map_graph &graph) {
+        graph.untag_all();
         //! With each assignment to the queue it will re-sort based on NodeWrapper.val
-        std::deque<NodeWrapper> openDeQueue{};
-        //! I dislike the way you have to get a non-const reference from the kmint framework
-        //! This is my workaround
-        auto &mutableActorLoc = graph[actorLoc.node_id()];
-        openDeQueue.emplace_back(NodeWrapper(0.0, mutableActorLoc, mutableActorLoc));
-        while (!openDeQueue.empty()) {
-            NodeWrapper &top_wrapper = openDeQueue.front();
-            auto *top_node = top_wrapper.getNode();
-            auto &topNodeRef = graph[top_node->node_id()];
+        std::vector<NodeWrapper *> openList{};
+        std::vector<NodeWrapper *> closedList{};
+        //! <rant>I dislike the way you have to get a non-const reference (and I have to since I want to use tag) from the kmint framework
+        //! This is my workaround. I know I break the holy const code but idc cause not undefined behaviour checkmate.</rant>
+        //! What it does: takes the node_id from the const ref and pull it from the graph non-const with [] operator.
+        auto *mutableActorLoc = &graph[actorLoc.node_id()];
+        auto *actorPtr = new NodeWrapper(0.0, mutableActorLoc, nullptr);
+        openList.emplace_back(actorPtr);
+        while (!openList.empty()) {
+            //! Sort the DeQueue
+            std::sort(openList.begin(), openList.end());
+            NodeWrapper *topPtr = openList.front();
             //! Same workaround as above
-            float dist = top_wrapper.getDist();
-            //! pop front node and tag as visited
-            top_node->tag(graph::node_tag::visited);
-            openDeQueue.pop_front();
-            for(auto &edge : topNodeRef) {
+            auto &topNodeRef = graph[topPtr->getNode()->node_id()];
+            topNodeRef.tag(graph::node_tag::visited);
+            float dist = topPtr->getDist();
+            for (auto &edge : topNodeRef) {
                 map::map_node &successor = edge.to();
+                //! Calculate new distance for successor
+                float h = calculate_heuristic(heuristic, successor, goalLoc);
+                if (h < 0) { return nullptr; }
+                float newDist = dist + edge.weight() + h;
+                auto *successorPtr = new NodeWrapper{newDist, &successor, topPtr};
                 //! Check if this edge leads to the goal node.
-                if(successor.node_id() == goalLoc.node_id()) {
-                    //TODO end search and trace path
-                    for(auto c : openDeQueue) {
-                        std::cout << c << std::endl;
+                if (successor.node_id() == goalLoc.node_id()) {
+                    std::vector<NodeWrapper *> path{};
+                    CreatePath(successorPtr, actorPtr, path, graph);
+                    auto *pathWrapper = new PathWrapper{path};
+
+                    for (auto c : openList) {
+                        std::cout << *c << std::endl;
+                        if (c->getNode()->tag() != graph::node_tag::visited &&
+                            c->getNode()->tag() != graph::node_tag::path) {
+                            delete c;
+                        }
                     }
+                    for (auto d : closedList) {
+                        if (d->getNode()->tag() != graph::node_tag::path) {
+                            delete d;
+                        }
+                    }
+                    return pathWrapper;
                 }
                 //! Check if the successor node has been visited before
-                if(successor.tag() == graph::node_tag::visited) {
+                if (successor.tag() == graph::node_tag::visited) {
                     continue;
                 }
-                //! Calculate new distance for successor
-                NodeWrapper wrapper{0.0, successor, topNodeRef};
-                float newDist = dist + edge.weight() + calculate_heuristic(h, successor, goalLoc);
-                auto it = std::find(openDeQueue.begin(), openDeQueue.end(), wrapper);
-                //! Check if the successor is already on the queue
-                //! Else check if the newDist is shorter than the old one
-                if(it == openDeQueue.end()) {
-                    //! Add successor and it's new distance to the openDeQueue
-                    openDeQueue.emplace_back(newDist, successor, topNodeRef);
-                } else if(it->getDist() > newDist) {
-                    it->setDist(newDist);
+                //! Find successor in queue
+                //auto it = std::find(openList.begin(), openList.end(), successorPtr);
+                NodeWrapper* found = nullptr;
+                for(auto node : openList) {
+                    if (node->getNode()->node_id() == successorPtr->getNode()->node_id()) {
+                        found = node;
+                        break;
+                    }
                 }
-                //! Sort the DeQueue
-                std::sort(openDeQueue.begin(), openDeQueue.end());
+                if (found == nullptr) {
+                    openList.emplace_back(successorPtr);
+                } else {
+                    //! check the distance to the previous we have processed before
+                    //! adjust distance if the previous was higher
+                    if (found->getDist() > newDist) {
+                        found->setDist(newDist);
+                        found->setParent(topPtr);
+                    }
+                }
+                //! Check if we got an it pointing to the end
+                //! If successor IS in the queue it will point to it.
+//                if (it == openList.end()) {
+//                    //! Add successor and it's new distance to the openList
+//                    openList.emplace_back(successorPtr);
+//                    continue;
+//                }
             }
+            //! pop front node and tag as visited
+            openList.erase(openList.);
         }
         //! Failed to find goal
-        for(auto c : openDeQueue) {
-            std::cout << "Fail: " << std::endl;
-            std::cout << c << std::endl;
+        std::cout << "Fail: " << std::endl;
+        for (auto c : openList) {
+            std::cout << *c << std::endl;
+            if (c->getNode()->tag() != graph::node_tag::visited) {
+                delete c;
+            }
+        }
+        for (auto d : closedList) {
+            delete d;
         }
     }
-} // namespace kmint
+}// namespace kmint

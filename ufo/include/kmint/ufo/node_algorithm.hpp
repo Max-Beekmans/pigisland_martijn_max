@@ -2,13 +2,15 @@
 #define UFO_NODE_ALGORITHM_HPP
 
 #include "kmint/map/map.hpp"
+#include "kmint/ufo/NodeWrapper.h"
+#include "kmint/ufo/PathWrapper.h"
 
 namespace kmint::ufo {
     ///
     /// Represents possible heuristics able to be calculated
     ///
     enum Heuristic {
-        MANHATTAN, DIAGONAL, EUCLIDEAN
+        MANHATTAN, DIAGONAL, EUCLIDEAN, DIJKSTRA
     };
 
     ///
@@ -51,7 +53,11 @@ namespace kmint::ufo {
 
     float calculate_heuristic(Heuristic h, map::map_node const &loc, map::map_node const &destLoc);
 
-    void tag_shortest_path_astar(Heuristic h, map::map_node const &actorLoc, map::map_node const &goalLoc, map::map_graph &graph);
+    PathWrapper * tag_shortest_path_astar(
+            Heuristic heuristic,
+            map::map_node const &actorLoc,
+            map::map_node const &goalLoc,
+            map::map_graph &graph);
 
 } // namespace kmint::ufo
 
