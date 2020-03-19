@@ -52,7 +52,43 @@ namespace kmint::ufo {
 
     double waiting_time(map::map_node const &node) { return node[0].weight(); }
 
+    void moveNodeToClosed(
+            NodeWrapper *node,
+            std::vector<NodeWrapper *> &openList,
+            std::vector<NodeWrapper *> &closedList) {
+        auto it = openList.begin();
+        for(auto i : openList) {
+            if(i->getNode()->node_id() == node->getNode()->node_id()) {
+                closedList.emplace_back(i);
+                openList.erase(it);
+                return;
+            } else {
+                it++;
+            }
+        }
+    }
 
+    NodeWrapper *findNode(NodeWrapper* node, std::vector<NodeWrapper *> &openList) {
+        for(auto node : openList) {
+            if (node->getNode()->node_id() == node->getNode()->node_id()) {
+                return node;
+            }
+        }
+        return nullptr;
+    }
+
+    NodeWrapper* getMinNode(std::vector<NodeWrapper*> &openList) {
+        NodeWrapper* min = nullptr;
+        for(auto node : openList) {
+            //update min node when smaller fCost is found
+            //update min node when equal but lower hCost
+            if(min == nullptr || min->fCost() > node->fCost()
+                || (min->fCost() == node->fCost() && node->hCost < min->hCost)) {
+                min = node;
+            }
+        }
+        return min;
+    }
 
     float calculate_heuristic(Heuristic h, const float x, const float y, const float goal_x, const float goal_y) {
         switch (h) {
@@ -103,30 +139,27 @@ namespace kmint::ufo {
     tag_shortest_path_astar(Heuristic heuristic, map::map_node const &actorLoc, map::map_node const &goalLoc,
                             map::map_graph &graph) {
         graph.untag_all();
-        //! With each assignment to the queue it will re-sort based on NodeWrapper.val
         std::vector<NodeWrapper *> openList{};
         std::vector<NodeWrapper *> closedList{};
         //! <rant>I dislike the way you have to get a non-const reference (and I have to since I want to use tag) from the kmint framework
         //! This is my workaround. I know I break the holy const code but idc cause not undefined behaviour checkmate.</rant>
         //! What it does: takes the node_id from the const ref and pull it from the graph non-const with [] operator.
         auto *mutableActorLoc = &graph[actorLoc.node_id()];
-        auto *actorPtr = new NodeWrapper(0.0, mutableActorLoc, nullptr);
+        auto *actorPtr = new NodeWrapper(0.0, 0.0, mutableActorLoc, nullptr);
         openList.emplace_back(actorPtr);
         while (!openList.empty()) {
-            //! Sort the DeQueue
-            std::sort(openList.begin(), openList.end());
-            NodeWrapper *topPtr = openList.front();
-            //! Same workaround as above
+            NodeWrapper *topPtr = getMinNode(openList);
+            //! Same workaround as above to get mutableRef
             auto &topNodeRef = graph[topPtr->getNode()->node_id()];
             topNodeRef.tag(graph::node_tag::visited);
-            float dist = topPtr->getDist();
+            float prevf = topPtr->fCost();
             for (auto &edge : topNodeRef) {
                 map::map_node &successor = edge.to();
                 //! Calculate new distance for successor
-                float h = calculate_heuristic(heuristic, successor, goalLoc);
-                if (h < 0) { return nullptr; }
-                float newDist = dist + edge.weight() + h;
-                auto *successorPtr = new NodeWrapper{newDist, &successor, topPtr};
+                float hCost = calculate_heuristic(heuristic, successor, goalLoc);
+                if (hCost < 0) { return nullptr; }
+                float gCost = prevf + edge.weight();
+                auto *successorPtr = new NodeWrapper{gCost, hCost, &successor, topPtr};
                 //! Check if this edge leads to the goal node.
                 if (successor.node_id() == goalLoc.node_id()) {
                     std::vector<NodeWrapper *> path{};
@@ -152,34 +185,21 @@ namespace kmint::ufo {
                     continue;
                 }
                 //! Find successor in queue
-                //auto it = std::find(openList.begin(), openList.end(), successorPtr);
-                NodeWrapper* found = nullptr;
-                for(auto node : openList) {
-                    if (node->getNode()->node_id() == successorPtr->getNode()->node_id()) {
-                        found = node;
-                        break;
-                    }
-                }
+                NodeWrapper* found = findNode(successorPtr, openList);
                 if (found == nullptr) {
                     openList.emplace_back(successorPtr);
                 } else {
                     //! check the distance to the previous we have processed before
                     //! adjust distance if the previous was higher
-                    if (found->getDist() > newDist) {
-                        found->setDist(newDist);
+                    if (found->fCost() > successorPtr->fCost()) {
+                        found->gCost = successorPtr->gCost;
+                        found->hCost = successorPtr->hCost;
                         found->setParent(topPtr);
                     }
                 }
-                //! Check if we got an it pointing to the end
-                //! If successor IS in the queue it will point to it.
-//                if (it == openList.end()) {
-//                    //! Add successor and it's new distance to the openList
-//                    openList.emplace_back(successorPtr);
-//                    continue;
-//                }
             }
-            //! pop front node and tag as visited
-            openList.erase(openList.);
+            //! Remove node from openList and add to closedList.
+            moveNodeToClosed(topPtr, openList, closedList);
         }
         //! Failed to find goal
         std::cout << "Fail: " << std::endl;
@@ -192,5 +212,6 @@ namespace kmint::ufo {
         for (auto d : closedList) {
             delete d;
         }
+        return nullptr;
     }
 }// namespace kmint

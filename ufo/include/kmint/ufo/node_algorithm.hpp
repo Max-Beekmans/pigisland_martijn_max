@@ -42,6 +42,18 @@ namespace kmint::ufo {
     ///
     map::map_node const &find_closest_node_to(map::map_graph const &graph, math::vector2d location);
 
+    NodeWrapper* findNode(NodeWrapper* node, std::vector<NodeWrapper*> &openList);
+
+    /// Get the node wrapper with the smallest fCost
+    NodeWrapper* getMinNode(std::vector<NodeWrapper*> &openList);
+
+    /// Moves node from openList to closedList
+    /// Helper function for a*
+    /// \param node to be moved
+    /// \param openList ref to openList
+    /// \param closedList ref to closedList
+    void moveNodeToClosed(NodeWrapper* node, std::vector<NodeWrapper*> &openList, std::vector<NodeWrapper*> &closedList);
+
     /// Calculate heuristic using method h
     /// \param h heuristic calculation method
     /// \param x current x position
