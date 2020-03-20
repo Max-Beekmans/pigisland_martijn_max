@@ -1,6 +1,5 @@
 # Author: Jeroen de Haas <jah.dehaas@avans.nl>
 cmake_minimum_required(VERSION 3.1.3)
-project(ufo)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(MSVC)
@@ -10,7 +9,6 @@ else()
     add_compile_options("$<$<CONFIG:DEBUG>:-g>")
 endif()
 
-  
 add_library(ufo-common STATIC
   src/kmint/ufo/resources.cpp
   src/kmint/ufo/tank.cpp
@@ -27,7 +25,7 @@ target_include_directories(ufo-common PRIVATE
   PUBLIC
   include)
 
-add_executable(ufo
+add_executable(ufo-executable
   src/main.cpp include/kmint/ufo/NodeWrapper.h)
 target_link_libraries(ufo PRIVATE ufo-common)
 
