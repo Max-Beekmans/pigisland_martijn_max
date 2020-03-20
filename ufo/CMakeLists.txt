@@ -8,7 +8,6 @@ else()
     add_compile_options("$<$<CONFIG:DEBUG>:-g>")
 endif()
 
-  
 add_library(ufo-common STATIC
   src/kmint/ufo/resources.cpp
   src/kmint/ufo/tank.cpp
