@@ -1,6 +1,4 @@
 # Author: Jeroen de Haas <jah.dehaas@avans.nl>
-cmake_minimum_required(VERSION 3.1.3)
-project(ufo)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(MSVC)
@@ -27,9 +25,8 @@ target_include_directories(ufo-common PRIVATE
   PUBLIC
   include)
 
-add_executable(ufo
-  src/main.cpp include/kmint/ufo/NodeWrapper.h)
-target_link_libraries(ufo PRIVATE ufo-common)
+add_executable(ufo-executable src/main.cpp)
+target_link_libraries(ufo-executable PRIVATE ufo-common)
 
 add_custom_target(ufo-resources ALL
   COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/resources" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources")
