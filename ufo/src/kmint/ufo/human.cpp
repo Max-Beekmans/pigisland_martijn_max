@@ -19,7 +19,7 @@ math::vector2d random_location() {
 
 } // namespace
 human::human()
-	: play::free_roaming_actor{ random_location() },
+	: play::free_roaming_actor{ random_location() }, dna_entity(),
 	drawable_{ *this, human_image() },
 	velocity_{20}{
 }
@@ -134,7 +134,13 @@ void human::act(delta_time dt) {
         }
     }
 
-    forceVector = separationVector + alignmentVector + cohesionVector + ufoVector * -1 + redTankVector * -0.5 + greenTankVector + doorVector * 0;
+    auto geneticAttributes = getGeneticAttributes();
+
+    forceVector = redTankVector * geneticAttributes.getAttractionToRedTank() +
+            greenTankVector * geneticAttributes.getAttractionToGreenTank() +
+            ufoVector * geneticAttributes.getAttractionToUFO() + doorVector * geneticAttributes.getAttractionToDoors() +
+            cohesionVector * geneticAttributes.getCohesion() + separationVector * geneticAttributes.getSeparation() +
+            alignmentVector * geneticAttributes.getAlignment();
 
     //vector becomes the normalized vector of all the combined forces
     //cant normalize if x or y is 0
@@ -172,27 +178,7 @@ void human::act(delta_time dt) {
     heading(forceVector + collisionVector + screenVector);
 
     location(location() + velocity_ * heading() * to_seconds(dt));
-}
-
-math::vector2d human::collisionWithBuildings() const {
-    std::vector<math::rectangle> buildings;
-    buildings.push_back({{576, 64}, {80, 48}}); //row 1, building 1
-    buildings.push_back({{624, 64}, {112, 62}}); //row 1, building 2
-    buildings.push_back({{576, 208}, {96, 112}}); //row 2, building 1
-    buildings.push_back({{320, 512}, {112, 128}}); //row 3, building 1
-    buildings.push_back({{432, 464}, {80, 160}}); //row 3, building 2
-    buildings.push_back({{576, 400}, {112, 96}}); //row 3, building 3
-
-    for(std::vector<math::rectangle>::iterator it = buildings.begin(); it != buildings.end(); it++) {
-        if(math::intersect(collision_box(), *it)){
-            math::vector2d vector = { location().x() - (it->top_left().x() + it->size().width()/2 - 8), location().y() - (it->top_left().y() + it->size().height()/2 - 8)};
-            if(vector.x() != 0 && vector.y() != 0){
-                math::vector2d norm = math::normalize(vector);
-                return math::normalize(vector);
-            }
-        }
-    }
-    return {0,0};
+    setFitness(getFitness() + 1);
 }
 
 } // namespace kmint::ufo

@@ -19,7 +19,7 @@ std::vector<kmint::ufo::human*> kmint::ufo::population::populate(){
 
     //Generate new DNA strings from human population
     auto counter = 0;
-    std::vector<std::unique_ptr<dna_tring>> dnaList;
+    std::vector<std::unique_ptr<dna_string>> dnaList;
     for(auto h = stage.begin(); h != stage.end(); h++) {
         auto &f = *h;
         if(auto c = dynamic_cast<human*>(&f); c) {
@@ -32,7 +32,7 @@ std::vector<kmint::ufo::human*> kmint::ufo::population::populate(){
             }
         }
 
-        dnaList.emplace_back(std::make_unique<dna_string>)first->getGeneticAttributes() * second->getGeneticAttributes()));
+        dnaList.emplace_back(std::make_unique<dna_string>(first->getGeneticAttributes() * second->getGeneticAttributes()));
 
         counter++;
     }

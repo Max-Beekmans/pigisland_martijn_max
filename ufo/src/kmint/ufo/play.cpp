@@ -15,6 +15,7 @@
 #include <random>
 #include <vector>
 #include <kmint/ufo/building.hpp>
+#include <kmint/ufo/population.hpp>
 
 namespace kmint::ufo {
 
@@ -27,6 +28,7 @@ int play() {
 
   // maak een podium aan
   play::stage s{ {1024, 768} };
+  std::unique_ptr<population> population = std::make_unique<kmint::ufo::population>(s);
 
   auto m = map();
   auto& graph = m.graph();
