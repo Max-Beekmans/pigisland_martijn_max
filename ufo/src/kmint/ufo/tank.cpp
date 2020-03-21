@@ -3,6 +3,8 @@
 #include "kmint/ufo/node_algorithm.hpp"
 #include "kmint/random.hpp"
 #include <iostream>
+#include <kmint/ufo/saucer.hpp>
+#include "kmint/ufo/tankwanderstate.h"
 
 namespace kmint::ufo {
 
@@ -22,28 +24,34 @@ graphics::image tank_image(tank_type t) {
 } // namespace
 
 tank::tank(map::map_graph &g, map::map_node& initial_node, tank_type t)
-	: play::map_bound_actor{ initial_node }, type_{t}, graph_{g},
-	    drawable_{ *this, graphics::image{tank_image(t)}}, path_(nullptr) {}
+	: play::map_bound_actor{ initial_node }, TankStateManager(), type_{t}, graph_{g},
+      drawable_{ *this, graphics::image{tank_image(t)}},
+      path_(nullptr) {
+    transferState(new TankWanderState());
+}
 
 void tank::act(delta_time dt) {
 	t_since_move_ += dt;
 	if (to_seconds(t_since_move_) >= 1) {
-	    if(path_ == nullptr || path_->reachedEnd()) {
-            auto &dest = ufo::find_node_of_kind(graph_, '1');
-            path_ = ufo::tag_shortest_path_astar(ufo::EUCLIDEAN, node(), dest, graph_);
-	    }
-		// pick random edge
-		//int next_index = random_int(0, node().num_edges());
-		//this->node(node()[next_index].to());
-		this->node(graph_[path_->popFront()->getNode()->node_id()]);
-		t_since_move_ = from_seconds(0);
+	    executeState(dt, *this);
 	}
-	// laat ook zien wat hij ziet
-	for (auto i = begin_perceived(); i != end_perceived(); ++i) {
-		auto const& a = *i;
-		//std::cout << "Saw something at " << a.location().x() << ", "
-		//	<< a.location().y() << "\n";
-	}
+//	if (to_seconds(t_since_move_) >= 1) {
+//	    if(path_ == nullptr || path_->reachedEnd()) {
+//            auto &dest = ufo::find_node_of_kind(graph_, '1');
+//            path_ = ufo::tag_shortest_path_astar(ufo::EUCLIDEAN, node(), dest, graph_);
+//	    }
+//		// pick random edge
+//		//int next_index = random_int(0, node().num_edges());
+//		//this->node(node()[next_index].to());
+//		this->node(graph_[path_->popFront()->getNode()->node_id()]);
+//		t_since_move_ = from_seconds(0);
+//	}
+//	// laat ook zien wat hij ziet
+//	for (auto i = begin_perceived(); i != end_perceived(); ++i) {
+//		auto const& a = *i;
+//		//std::cout << "Saw something at " << a.location().x() << ", "
+//		//	<< a.location().y() << "\n";
+//	}
 }
 
 } // namespace kmint::ufo

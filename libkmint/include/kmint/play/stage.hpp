@@ -22,7 +22,7 @@ class stage_overlay;
  * The stage facilitates the interaction of actors in a simulation.
  *
  * It constructs and owns the actors on stage. It is responsible for maintaining
- * the actors' perceived and collision sets and calls the actors' act methods
+ * the actors' perceived and collision sets and calls the actors' executeState methods
  * every tick.
  */
 class stage {
@@ -78,8 +78,8 @@ public:
     destructor will be called. Any reference or pointer to that actor is now
     invalid.
 
-    This function invalidates iterators and must not be called from any \a act
-    method. If the method is called from an act function, an exception is
+    This function invalidates iterators and must not be called from any \a executeState
+    method. If the method is called from an executeState function, an exception is
     thrown.
 
     \param a Actor to remove from play.

@@ -5,6 +5,7 @@
 #include "kmint/play.hpp"
 #include "kmint/primitives.hpp"
 #include "node_algorithm.hpp"
+#include "kmint/ufo/tankstatemanager.h"
 
 namespace kmint::ufo {
 
@@ -12,10 +13,9 @@ namespace kmint::ufo {
             red, green
         };
 
-        class tank : public play::map_bound_actor {
+    class tank : public play::map_bound_actor, public TankStateManager {
         public:
             tank(map::map_graph &g, map::map_node &initial_node, tank_type t);
-
             tank& operator=(tank &&) = default;
 
             // wordt elke game tick aangeroepen

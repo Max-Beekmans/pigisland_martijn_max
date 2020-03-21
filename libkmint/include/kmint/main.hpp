@@ -56,7 +56,7 @@ struct loop_controls {
   terminated immediately
   -# Otherwise
     -# If \ref kmint::loop_controls::pause is \a false, \ref kmint::play::stage
-  "stage" \a s will have its \ref kmint::play::stage::act "act" method called.
+  "stage" \a s will have its \ref kmint::play::stage::act "executeState" method called.
     -# And then, if \ref kmint::loop_controls::render is true, all actors are
   rendered
   -# Go back to step 1

@@ -228,7 +228,7 @@ SEPARATE_MEMBER_PAGES  = NO
 
 TAB_SIZE               = 2
 
-# This tag can be used to specify a number of aliases that act as commands in
+# This tag can be used to specify a number of aliases that executeState as commands in
 # the documentation. An alias has the form:
 # name=value
 # For example adding
