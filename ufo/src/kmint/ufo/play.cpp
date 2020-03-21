@@ -28,7 +28,10 @@ int play() {
 
   // maak een podium aan
   play::stage s{ {1024, 768} };
-  std::unique_ptr<population> population = std::make_unique<kmint::ufo::population>(s);
+  std::unique_ptr<population> pop = std::make_unique<kmint::ufo::population>(s);
+  int humanCounter = 0;
+  int roundCounter = 0;
+  delta_time timer{};
 
   auto m = map();
   auto& graph = m.graph();
@@ -38,7 +41,7 @@ int play() {
   s.build_actor<play::map_actor>(math::vector2d{0.f, 0.f}, m.graph());
 
   for (std::size_t h{0}; h < 100; ++h) {
-    s.build_actor<ufo::human>();
+    s.build_actor<ufo::human>(humanCounter);
   }
 
   s.build_actor<ufo::building>(math::vector2d {576, 64}, math::size{80, 48}); //row 1, building 1
@@ -73,6 +76,15 @@ int play() {
     // sinds de vorige keer dat deze lambda werd aangeroepen
     // loop controls is een object met eigenschappen die je kunt gebruiken om de
     // main-loop aan te sturen.
+    timer += dt;
+    if(to_seconds(timer) >= 1) {
+      roundCounter++;
+      timer = from_seconds(0);
+    }
+
+    if(humanCounter >= 100 || roundCounter >= 200) {
+      pop->populate();
+    }
 
     for (ui::events::event &e : event_source) {
       // event heeft een methode handle_quit die controleert
