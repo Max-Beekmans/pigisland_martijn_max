@@ -4,7 +4,7 @@
 #include "kmint/map/map.hpp"
 #include "kmint/play.hpp"
 #include "kmint/primitives.hpp"
-
+#include "PathWrapper.h"
 
 namespace kmint::ufo {
 
@@ -19,14 +19,15 @@ public:
 	// geeft de lengte van een zijde van de collision box van deze actor terug.
 	// Belangrijk voor collision detection
 	scalar collision_range() const override { return 16.0; }
-	// geeft aan dat andré andere actors kan zien
+	// geeft aan dat andre andere actors kan zien
 	bool perceptive() const override { return true; }
 
 private:
-	// hoeveel tijd is verstreken sinds de laatste beweging
 	delta_time t_since_move_{};
-	// weet hoe de koe getekend moet worden
 	play::image_drawable drawable_;
+	map::map_graph& graph_;
+	PathWrapper* path_{};
+	int dest = 0;
 };
 
 } // namespace kmint::ufo

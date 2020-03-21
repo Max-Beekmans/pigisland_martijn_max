@@ -13,31 +13,28 @@ namespace kmint::ufo {
 /// Provides comparative operator overloads to compare struct
     class NodeWrapper {
     public:
-        NodeWrapper(const float val, map::map_node &node, NodeWrapper &parent) :
-                val_(val), node_(&node), parent_(&parent) {}
+        NodeWrapper(float gCost, float hCost, map::map_node &node, NodeWrapper &parent) :
+                gCost(gCost), hCost(hCost), node_(&node), parent_(&parent) {}
 
-        NodeWrapper(const float val, map::map_node *node, NodeWrapper *parent) :
-                val_(val), node_(node), parent_(parent) {}
+        NodeWrapper(float gCost, float hCost, map::map_node *node, NodeWrapper *parent) :
+                gCost(gCost), hCost(hCost), node_(node), parent_(parent) {}
 
-        void setDist(const float dist) { val_ = dist; }
-
-        float getDist() const { return val_; }
+        float fCost() const { return gCost + hCost; }
 
         map::map_node *getNode() const { return node_; }
+        NodeWrapper *getParent() const { return parent_; }
 
         void setParent(NodeWrapper &parent) { parent_ = &parent; }
         void setParent(NodeWrapper *parent) { parent_ = parent; }
 
-        NodeWrapper *getParent() const { return parent_; }
-
         NodeWrapper &operator=(NodeWrapper const &) = default;
 
         friend bool operator<(const NodeWrapper &lhs, const NodeWrapper &rhs) {
-            return lhs.getDist() < rhs.getDist();
+            return lhs.fCost() < rhs.fCost();
         }
 
         friend bool operator>(const NodeWrapper &lhs, const NodeWrapper &rhs) {
-            return lhs.getDist() > rhs.getDist();
+            return lhs.fCost() > rhs.fCost();
         }
 
         friend bool operator==(const NodeWrapper &lhs, const NodeWrapper &rhs) {
@@ -46,12 +43,12 @@ namespace kmint::ufo {
 
         friend std::ostream &operator<<(std::ostream &os, const NodeWrapper &nodeWrapper) {
             return os << "Distance to node[" << nodeWrapper.getNode()->node_id() << ":"
-                      << nodeWrapper.getParent()->getNode()->node_id() << "]: " << nodeWrapper.getDist();
+                      << nodeWrapper.getParent()->getNode()->node_id() << "]: " << nodeWrapper.fCost();
         }
 
+        float gCost = MAXFLOAT;
+        float hCost = 0;
     private:
-
-        float val_ = FLT_MAX;
         map::map_node *node_;
         NodeWrapper *parent_;
     };
