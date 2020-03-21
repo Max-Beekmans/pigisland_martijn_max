@@ -70,11 +70,8 @@ void saucer::act(delta_time dt) {
   location(location() + v_ * to_seconds(dt));
   for (std::size_t ix{}; ix < num_colliding_actors(); ++ix) {
     auto &other = colliding_actor(ix);
-    if (dynamic_cast<human *>(&other)) {
-      // remove human from play
-	  std::cout << "Beam me up scotty\n";
-      // -- CHANGE THIS TO MORE SUITABLE BEHAVIOR FOR THE ASSESSMENT
-      other.remove();
+    if (auto h = dynamic_cast<human *>(&other); h) {
+      h->setIsDead(true);
     }
   }
 }

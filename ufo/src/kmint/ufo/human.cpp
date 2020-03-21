@@ -52,7 +52,6 @@ void human::setIsSafe(bool isSafe) {
 }
 
 void human::act(delta_time dt) {
-    math::vector2d randomVector = {random_scalar(-1, 1), random_scalar(-1, 1)};
     math::vector2d forceVector = {0,0};
     math::vector2d alignmentVector = {0,0};
     math::vector2d cohesionVector = {0,0};
@@ -64,6 +63,15 @@ void human::act(delta_time dt) {
     math::vector2d doorVector = {0,0};
     math::vector2d screenVector = {0,0};
 
+    t_since_move_ += dt;
+
+    if(to_seconds(t_since_move_) >= 1) {
+        if(!isDead_) setFitness(getFitness() + 1);
+
+        randomVector_ = {random_scalar(-1, 1), random_scalar(-1, 1)};
+        t_since_move_ = from_seconds(0);
+    }
+
     int perceivedHumans = 0;
     int perceivedSaucers = 0;
     int perceivedDoors = 0;
@@ -72,7 +80,7 @@ void human::act(delta_time dt) {
         if (dynamic_cast<human *>(&other)) {
             cohesionVector += { other.location() };
             alignmentVector += other.heading();
-            separationVector += {other.location() - location()};
+            separationVector += {other.location().x() - location().x(), other.location().y() - location().y()};
             perceivedHumans++;
         }
         else if (dynamic_cast<saucer *>(&other)) {
@@ -86,111 +94,86 @@ void human::act(delta_time dt) {
         else if ( auto t = dynamic_cast<tank *>(&other)) {
             if(t->type() == kmint::ufo::tank_type::red) {
                 redTankVector += {other.location().x() - location().x(), other.location().y() - location().y()};
-                if (redTankVector.x() != 0 && redTankVector.y() != 0) {
-                    redTankVector = math::normalize(redTankVector);
-                } else {
-                    redTankVector = {0, 0};
-                }
+                redTankVector = normalizeForce(redTankVector);
+
             }
             else if(t->type() == kmint::ufo::tank_type::green) {
                 greenTankVector += {other.location().x() - location().x(), other.location().y() - location().y()};
-                if (greenTankVector.x() != 0 && greenTankVector.y() != 0) {
-                    greenTankVector = math::normalize(greenTankVector);
-                } else {
-                    greenTankVector = {0, 0};
-                }
+                greenTankVector = normalizeForce(greenTankVector);
             }
         }
     }
 
     if(perceivedHumans > 0) {
         alignmentVector /= perceivedHumans;
-        if (alignmentVector.x() != 0 && alignmentVector.y() != 0) {
-            alignmentVector = math::normalize(alignmentVector);
-        } else {
-            alignmentVector = {0, 0};
-        }
+        alignmentVector = normalizeForce(alignmentVector);
 
         cohesionVector /= perceivedHumans;
         cohesionVector -= {location().x(), location().y()};
-        if (cohesionVector.x() != 0 && cohesionVector.y() != 0) {
-            cohesionVector = math::normalize(cohesionVector);
-        } else {
-            cohesionVector = {0, 0};
-        }
+        cohesionVector = normalizeForce(cohesionVector);
 
         separationVector /= perceivedHumans;
         separationVector *= -1;
-        if (separationVector.x() != 0 && separationVector.y() != 0) {
-            separationVector = math::normalize(separationVector);
-        } else {
-            separationVector = {0, 0};
-        }
+        separationVector = normalizeForce(separationVector);
+
     }
 
     if(perceivedSaucers > 0) {
         ufoVector /= perceivedSaucers;
-        if(ufoVector.x() != 0 && ufoVector.y() != 0) {
-            ufoVector = math::normalize(ufoVector);
-        } else {
-            ufoVector = {0,0};
-        }
+        ufoVector = normalizeForce(ufoVector);
     }
 
     if(perceivedDoors > 0){
         doorVector /= perceivedDoors;
-        if(doorVector.x() != 0 && doorVector.y() != 0) {
-            doorVector = math::normalize(doorVector);
-        } else {
-            doorVector = {0,0};
-        }
+        doorVector = normalizeForce(doorVector);
     }
 
     auto geneticAttributes = getGeneticAttributes();
-
     forceVector = redTankVector * geneticAttributes.getAttractionToRedTank() +
-            greenTankVector * geneticAttributes.getAttractionToGreenTank() +
-            ufoVector * geneticAttributes.getAttractionToUFO() + doorVector * geneticAttributes.getAttractionToDoors() +
-            cohesionVector * geneticAttributes.getCohesion() + separationVector * geneticAttributes.getSeparation() +
-            alignmentVector * geneticAttributes.getAlignment();
+                  greenTankVector * geneticAttributes.getAttractionToGreenTank() +
+                  ufoVector * geneticAttributes.getAttractionToUFO() + doorVector * geneticAttributes.getAttractionToDoors() +
+                  cohesionVector * geneticAttributes.getCohesion() + separationVector * geneticAttributes.getSeparation() +
+                  alignmentVector * geneticAttributes.getAlignment();
 
-    //vector becomes the normalized vector of all the combined forces
-    //cant normalize if x or y is 0
-    if(forceVector.x() != 0 && forceVector.y() != 0){
-        forceVector = math::normalize(forceVector);
-    } else {
-        forceVector = {0,0};
-    }
+    forceVector = normalizeForce(forceVector);
 
     if(collidesWithScreen()) {
         screenVector += { 1024/2 - location().x(), 768/2 - location().y() };
-        if(screenVector.x() != 0 && screenVector.y() != 0) {
-            screenVector = math::normalize(screenVector);
-        } else {
-            screenVector = {0,0};
-        }
+        screenVector = normalizeForce(screenVector);
     }
 
     int collidedActors = 0;
     for (std::size_t ix{}; ix < num_colliding_actors(); ++ix) {
         auto &other = colliding_actor(ix);
-        collisionVector += { location() - other.location() };
+        if(dynamic_cast<door*>(&other)) {
+            isSafe_ = true;
+        }
+        if(dynamic_cast<building*>(&other)) {
+            std::cout << "collision with building" << std::endl;
+        }
+        collisionVector += { location().x() - other.location().x(), location().y() - other.location().y() };
+        //collisionVector -= forceVector;
         collidedActors++;
     }
 
     if(collidedActors > 0) {
         collisionVector /= collidedActors;
-        if(collisionVector.x() != 0 && collisionVector.y() != 0) {
-            collisionVector = math::normalize(collisionVector);
-        } else {
-            collisionVector = {0,0};
-        }
+        collisionVector = normalizeForce(collisionVector);
     }
 
-    heading(forceVector + collisionVector * 0 + screenVector);
+    math::vector2d finalVector = forceVector + screenVector + collisionVector + (screenVector + collisionVector == math::vector2d{0,0} ? randomVector_ : math::vector2d{0,0});
+    finalVector = normalizeForce(finalVector);
+    heading(finalVector);
 
     location(location() + velocity_ * heading() * to_seconds(dt));
-    setFitness(getFitness() + 1);
+}
+
+math::vector2d human::normalizeForce(math::vector2d force) const {
+    if(force.x() != 0 && force.y() != 0) {
+        return math::normalize(force);
+    } else {
+        return {static_cast<float>(force.x() > 0 ? 1 : 0), static_cast<float>(force.y() > 0 ? 1 : 0) };
+    }
 }
 
 math::vector2d human::collisionWithBuildings() const {
@@ -202,16 +185,19 @@ math::vector2d human::collisionWithBuildings() const {
     buildings.push_back({{432, 464}, {80, 160}}); //row 3, building 2
     buildings.push_back({{576, 400}, {112, 96}}); //row 3, building 3
 
+    math::vector2d vector = {0,0};
+    int counter = 0;
+
     for(std::vector<math::rectangle>::iterator it = buildings.begin(); it != buildings.end(); it++) {
         if(math::intersect(collision_box(), *it)){
-            math::vector2d vector = { location().x() - (it->top_left().x() + it->size().width()/2 - 8), location().y() - (it->top_left().y() + it->size().height()/2 - 8)};
-            if(vector.x() != 0 && vector.y() != 0){
-                math::vector2d norm = math::normalize(vector);
-                return math::normalize(vector);
-            }
+            vector += { location().x() - (it->top_left().x() + it->size().width()/2 - 8), location().y() - (it->top_left().y() + it->size().height()/2 - 8)};
+            counter++;
         }
     }
-    return {0,0};
+
+    if(counter > 0) vector /= counter;
+
+    return normalizeForce(vector);
 }
 
 } // namespace kmint::ufo

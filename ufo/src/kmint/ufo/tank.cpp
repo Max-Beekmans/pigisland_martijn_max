@@ -1,4 +1,5 @@
 #include "kmint/ufo/tank.hpp"
+#include "kmint/ufo/human.hpp"
 #include "kmint/graphics.hpp"
 #include "kmint/ufo/node_algorithm.hpp"
 #include "kmint/random.hpp"
@@ -38,12 +39,13 @@ void tank::act(delta_time dt) {
 		this->node(graph_[path_->popFront()->getNode()->node_id()]);
 		t_since_move_ = from_seconds(0);
 	}
-	// laat ook zien wat hij ziet
-	for (auto i = begin_perceived(); i != end_perceived(); ++i) {
-		auto const& a = *i;
-		//std::cout << "Saw something at " << a.location().x() << ", "
-		//	<< a.location().y() << "\n";
-	}
+
+    for (std::size_t ix{}; ix < num_colliding_actors(); ++ix) {
+        auto &other = colliding_actor(ix);
+        if (auto h = dynamic_cast<human *>(&other); h) {
+            type_ == tank_type::green ? h->setIsSafe(true) : h->setIsDead(true);
+        }
+    }
 }
 
 } // namespace kmint::ufo

@@ -15,11 +15,13 @@ public:
   bool must_draw() const override { return !isDead_ && !isSafe_; }
   void act(delta_time dt) override;
   // participates in collisions
-  bool incorporeal() const override { return false; }
-  scalar collision_range() const override { return 32.0; }
+  bool incorporeal() const override { return isDead_ || isSafe_; }
+  scalar collision_range() const override { return 22.0; }
   bool perceptive() const override { return true; }
   scalar perception_range() const override { return 100.f; }
   math::vector2d collisionWithBuildings() const;
+  void collision();
+  math::vector2d normalizeForce(math::vector2d force) const;
   bool isDead() const;
   void setIsDead(bool isDead);
   bool isSafe() const;
@@ -34,6 +36,8 @@ private:
   bool isSafe_;
   int fitness_;
   int humanCounter_;
+  delta_time t_since_move_{};
+  math::vector2d randomVector_{0,0};
 };
 
 } // namespace kmint::ufo
