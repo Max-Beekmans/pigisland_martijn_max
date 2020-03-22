@@ -530,7 +530,7 @@
         : play::map_bound_actor{g, random_hare_node(g)},
           drawable_{*this, kmint::graphics::image{hare_image, 0.2}} {}
 
-    void hare::act(kmint::delta_time dt) {
+    void hare::executeState(kmint::delta_time dt) {
       for (std::size_t i = 0; i < num_colliding_actors(); ++i) {
         auto &a = colliding_actor(i);
         if (&a == cow_) {

@@ -1,14 +1,14 @@
-#include "kmint/ufo/node_algorithm.hpp"
-#include "kmint/random.hpp"
 #include <algorithm>
 #include <cassert>
 #include <numeric>
+#include <utility>
+#include <cfloat>
 #include <iostream>
 #include <set>
 #include <queue>
 #include <stack>
-#include <utility>
-#include <cfloat>
+#include "kmint/ufo/node_algorithm.hpp"
+#include "kmint/random.hpp"
 
 namespace kmint::ufo {
 
@@ -57,8 +57,8 @@ namespace kmint::ufo {
             std::vector<NodeWrapper *> &openList,
             std::vector<NodeWrapper *> &closedList) {
         auto it = openList.begin();
-        for(auto i : openList) {
-            if(i->getNode()->node_id() == node->getNode()->node_id()) {
+        for (auto i : openList) {
+            if (i->getNode()->node_id() == node->getNode()->node_id()) {
                 closedList.emplace_back(i);
                 openList.erase(it);
                 return;
@@ -68,8 +68,8 @@ namespace kmint::ufo {
         }
     }
 
-    NodeWrapper *findNode(NodeWrapper* node, std::vector<NodeWrapper *> &openList) {
-        for(auto i : openList) {
+    NodeWrapper *findNode(NodeWrapper *node, std::vector<NodeWrapper *> &openList) {
+        for (auto i : openList) {
             if (i->getNode()->node_id() == node->getNode()->node_id()) {
                 return i;
             }
@@ -77,12 +77,12 @@ namespace kmint::ufo {
         return nullptr;
     }
 
-    NodeWrapper* getMinNode(std::vector<NodeWrapper*> &openList) {
-        NodeWrapper* min = nullptr;
-        for(auto node : openList) {
+    NodeWrapper *getMinNode(std::vector<NodeWrapper *> &openList) {
+        NodeWrapper *min = nullptr;
+        for (auto node : openList) {
             //update min node when smaller fCost is found
             //update min node when equal but lower hCost
-            if(min == nullptr || min->fCost() > node->fCost()
+            if (min == nullptr || min->fCost() > node->fCost()
                 || (min->fCost() == node->fCost() && node->hCost < min->hCost)) {
                 min = node;
             }
@@ -135,12 +135,12 @@ namespace kmint::ufo {
     /// \param heuristic used to calculate distance between the current position and the goal position.
     /// \param actorLoc starting map_node of search.
     /// \param goalLoc destination map_node of search
-    PathWrapper *
-    tag_shortest_path_astar(Heuristic heuristic, map::map_node const &actorLoc, map::map_node const &goalLoc,
-                            map::map_graph &graph) {
+    PathWrapper tag_shortest_path_astar(Heuristic heuristic, map::map_node const &actorLoc, map::map_node
+    const &goalLoc, map::map_graph &graph) {
         graph.untag_all();
         std::vector<NodeWrapper *> openList{};
         std::vector<NodeWrapper *> closedList{};
+        PathWrapper pathWrapper{};
         //! <rant>I dislike the way you have to get a non-const reference (and I have to since I want to use tag) from the kmint framework
         //! This is my workaround. I know I break the holy const code but idc cause not undefined behaviour checkmate.</rant>
         //! What it does: takes the node_id from the const ref and pull it from the graph non-const with [] operator.
@@ -157,17 +157,17 @@ namespace kmint::ufo {
                 map::map_node &successor = edge.to();
                 //! Calculate new distance for successor
                 float hCost = calculate_heuristic(heuristic, successor, goalLoc);
-                if (hCost < 0) { return nullptr; }
+                if (hCost < 0) { return pathWrapper; }
                 float gCost = prevf + edge.weight();
                 auto *successorPtr = new NodeWrapper{gCost, hCost, &successor, topPtr};
                 //! Check if this edge leads to the goal node.
                 if (successor.node_id() == goalLoc.node_id()) {
                     std::vector<NodeWrapper *> path{};
                     CreatePath(successorPtr, actorPtr, path, graph);
-                    auto *pathWrapper = new PathWrapper{path};
+                    pathWrapper = PathWrapper{path};
 
                     for (auto c : openList) {
-                        std::cout << *c << std::endl;
+                        //std::cout << *c << std::endl;
                         if (c->getNode()->tag() != graph::node_tag::visited &&
                             c->getNode()->tag() != graph::node_tag::path) {
                             delete c;
@@ -185,7 +185,7 @@ namespace kmint::ufo {
                     continue;
                 }
                 //! Find successor on openList
-                NodeWrapper* found = findNode(successorPtr, openList);
+                NodeWrapper *found = findNode(successorPtr, openList);
                 if (found == nullptr) {
                     openList.emplace_back(successorPtr);
                 } else {
@@ -212,6 +212,6 @@ namespace kmint::ufo {
         for (auto d : closedList) {
             delete d;
         }
-        return nullptr;
+        return pathWrapper;
     }
 }// namespace kmint

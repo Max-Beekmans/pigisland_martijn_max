@@ -10,7 +10,7 @@ namespace kmint::ufo {
 
 class andre : public play::map_bound_actor {
 public:
-	andre(map::map_graph& g, map::map_node& initial_node);
+	andre(map::map_graph& g, map::map_node& initial_node, PathWrapper &pathWrapper);
 	// wordt elke game tick aangeroepen
 	void act(delta_time dt) override;
 	ui::drawable const& drawable() const override { return drawable_; }
@@ -26,7 +26,7 @@ private:
 	delta_time t_since_move_{};
 	play::image_drawable drawable_;
 	map::map_graph& graph_;
-	PathWrapper* path_{};
+	PathWrapper &path_;
 	int dest = 0;
 };
 

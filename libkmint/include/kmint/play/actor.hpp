@@ -298,7 +298,7 @@ public:
                                             deref_actor_const);
   }
 
-  /*! \brief Marks the actor for removal at the end stage::act
+  /*! \brief Marks the actor for removal at the end stage::executeState
    */
   void remove() noexcept { removed_ = true; }
   /*! \brief Checks if the actor is marked for removal

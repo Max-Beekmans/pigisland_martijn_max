@@ -5,6 +5,7 @@
 #include "kmint/play.hpp"
 #include "kmint/primitives.hpp"
 #include "node_algorithm.hpp"
+#include "kmint/ufo/tankstatemanager.h"
 
 namespace kmint::ufo {
 
@@ -12,9 +13,14 @@ namespace kmint::ufo {
             red, green
         };
 
-        class tank : public play::map_bound_actor {
+    class tank : public play::map_bound_actor, public TankStateManager {
         public:
-            tank(map::map_graph &g, map::map_node &initial_node, tank_type t);
+            tank(map::map_graph &g,
+                 map::map_node &initial_node,
+                 tank_type t,
+                 std::vector<size_t> shields,
+                 std::vector<size_t> grenades,
+                 PathWrapper &andrePath);
 
             tank& operator=(tank &&) = default;
 
@@ -39,12 +45,31 @@ namespace kmint::ufo {
 
             tank_type type() const { return type_; }
 
+            map::map_graph &graph() const { return graph_; }
+
+            /// Get path to nearest shield
+            /// \return PathWrapper obj
+            PathWrapper get_path_to_shield();
+            /// Get path to nearest EMP grenade
+            /// \return PathWrapper obj
+            PathWrapper get_path_to_emp();
+            //TODO calculate steps, go to andrePath_[steps]
+            /// Get path to andre
+            /// \return PathWrapper obj
+            PathWrapper get_path_to_andre();
+
+            bool hasEMP_ = false;
+            bool hasShield_ = false;
+            int tankHP = 100;
         private:
             map::map_graph &graph_;
             play::image_drawable drawable_;
             delta_time t_since_move_{};
             tank_type type_;
             PathWrapper* path_{};
+            PathWrapper andrePath_;
+            std::vector<size_t> shields_;
+            std::vector<size_t> grenades_;
         };
 
     } // namespace kmint
