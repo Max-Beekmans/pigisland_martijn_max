@@ -1,5 +1,5 @@
 //
-// Created by osboxes on 3/21/20.
+// Created by Max on 3/21/20.
 //
 
 #ifndef UFO_TANKSTATEMANAGER_H

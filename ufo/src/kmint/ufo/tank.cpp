@@ -1,8 +1,8 @@
+#include <iostream>
+#include <utility>
 #include "kmint/ufo/tank.hpp"
 #include "kmint/graphics.hpp"
 #include "kmint/ufo/node_algorithm.hpp"
-#include <iostream>
-#include <utility>
 #include "kmint/ufo/saucer.hpp"
 #include "kmint/ufo/traveltoanwbstate.h"
 
@@ -27,7 +27,6 @@ namespace kmint::ufo {
               graph_{g},
               drawable_{*this, graphics::image{tank_image(t)}},
               type_{t},
-              path_(nullptr),
               andrePath_(andrePath),
               shields_(std::move(shields)),
               grenades_(std::move(grenades)) {
@@ -37,27 +36,27 @@ namespace kmint::ufo {
     PathWrapper tank::get_path_to_shield() {
         std::pair<float, float> minPair{MAXFLOAT, MAXFLOAT};
         for (auto s : shields_) {
-            float h = calculate_heuristic(Heuristic::MANHATTAN, node(), graph_[s]);
+            float h = calculate_heuristic(MANHATTAN, node(), graph_[s]);
             if (h < minPair.second) {
                 minPair = {s, h};
             }
         }
-        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[minPair.first], graph_);
+        return tag_shortest_path_astar(MANHATTAN, node(), graph_[minPair.first], graph_);
     }
 
     PathWrapper tank::get_path_to_emp() {
         std::pair<float, float> minPair{MAXFLOAT, MAXFLOAT};
         for (auto s : grenades_) {
-            float h = calculate_heuristic(Heuristic::MANHATTAN, node(), graph_[s]);
+            float h = calculate_heuristic(MANHATTAN, node(), graph_[s]);
             if (h < minPair.second) {
                 minPair = {s, h};
             }
         }
-        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[minPair.first], graph_);
+        return tag_shortest_path_astar(MANHATTAN, node(), graph_[minPair.first], graph_);
     }
 
     PathWrapper tank::get_path_to_andre() {
-        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[andrePath_.popFront()->getNode()->node_id()],
+        return tag_shortest_path_astar(MANHATTAN, node(), graph_[andrePath_.popFront()->getNode()->node_id()],
                                        graph_);
     }
 
@@ -70,22 +69,5 @@ namespace kmint::ufo {
         if (tankHP < 0) {
             transferState(new TravelToANWBState());
         }
-//	if (to_seconds(t_since_move_) >= 1) {
-//	    if(path_ == nullptr || path_->reachedEnd()) {
-//            auto &dest = ufo::find_node_of_kind(graph_, '1');
-//            path_ = ufo::tag_shortest_path_astar(ufo::EUCLIDEAN, node(), dest, graph_);
-//	    }
-//		// pick random edge
-//		//int next_index = random_int(0, node().num_edges());
-//		//this->node(node()[next_index].to());
-//		this->node(graph_[path_->popFront()->getNode()->node_id()]);
-//		t_since_move_ = from_seconds(0);
-//	}
-//	// laat ook zien wat hij ziet
-//	for (auto i = begin_perceived(); i != end_perceived(); ++i) {
-//		auto const& a = *i;
-//		//std::cout << "Saw something at " << a.location().x() << ", "
-//		//	<< a.location().y() << "\n";
-//	}
     }
 } // namespace kmint::ufo

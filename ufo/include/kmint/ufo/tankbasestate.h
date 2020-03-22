@@ -1,5 +1,5 @@
 //
-// Created by osboxes on 3/21/20.
+// Created by Max on 3/21/20.
 //
 
 #ifndef UFO_TANKBASESTATE_H
@@ -12,9 +12,8 @@ namespace kmint::ufo {
 
     class TankBaseState {
     public:
+        virtual ~TankBaseState() = default;
         virtual void executeState(tank &actor) = 0;
-    protected:
-        delta_time t_since_move_{};
     };
 }
 

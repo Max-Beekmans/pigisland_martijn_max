@@ -9,11 +9,14 @@ namespace kmint::ufo {
     class TravelToGrenadeState : public TankBaseState {
     public:
         void executeState(tank &actor) override {
+            auto& imageDrawable = dynamic_cast<play::image_drawable &>(actor.getMutableDrawable());
+            imageDrawable.set_tint(graphics::colors::black);
             if (path_.isEmpty() && !path_.reachedEnd()) {
                 path_ = actor.get_path_to_emp();
             } else if (path_.reachedEnd()) {
                 actor.hasEMP_ = true;
                 path_.deletePath();
+                imageDrawable.remove_tint();
                 actor.previousState();
                 return;
             }

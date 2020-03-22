@@ -9,69 +9,71 @@
 
 namespace kmint::ufo {
 
-        enum class tank_type {
-            red, green
-        };
+    enum class tank_type {
+        red, green
+    };
 
     class tank : public play::map_bound_actor, public TankStateManager {
-        public:
-            tank(map::map_graph &g,
-                 map::map_node &initial_node,
-                 tank_type t,
-                 std::vector<size_t> shields,
-                 std::vector<size_t> grenades,
-                 PathWrapper &andrePath);
+    public:
+        tank(map::map_graph &g,
+             map::map_node &initial_node,
+             tank_type t,
+             std::vector<size_t> shields,
+             std::vector<size_t> grenades,
+             PathWrapper &andrePath);
 
-            tank& operator=(tank &&) = default;
+        tank &operator=(tank &&) = default;
 
-            // wordt elke game tick aangeroepen
-            void act(delta_time dt) override;
+        // wordt elke game tick aangeroepen
+        void act(delta_time dt) override;
 
-            ui::drawable const &drawable() const override { return drawable_; }
+        ui::drawable const &drawable() const override { return drawable_; }
 
-            // als incorporeal false is, doet de actor mee aan collision detection
-            bool incorporeal() const override { return false; }
+        ui::drawable &getMutableDrawable() { return drawable_; }
 
-            // geeft de lengte van een zijde van de collision box van deze actor terug.
-            // Belangrijk voor collision detection
-            scalar collision_range() const override { return 16.0; }
+        // als incorporeal false is, doet de actor mee aan collision detection
+        bool incorporeal() const override { return false; }
 
-            // geeft aan dat de tank andere actors kan zien
-            bool perceptive() const override { return true; }
+        // geeft de lengte van een zijde van de collision box van deze actor terug.
+        // Belangrijk voor collision detection
+        scalar collision_range() const override { return 16.0; }
 
-            // geeft het bereik aan waarbinnen een tank
-            // andere actors kan waarnemen.
-            scalar perception_range() const override { return 200.f; }
+        // geeft aan dat de tank andere actors kan zien
+        bool perceptive() const override { return true; }
 
-            tank_type type() const { return type_; }
+        // geeft het bereik aan waarbinnen een tank
+        // andere actors kan waarnemen.
+        scalar perception_range() const override { return 200.f; }
 
-            map::map_graph &graph() const { return graph_; }
+        tank_type type() const { return type_; }
 
-            /// Get path to nearest shield
-            /// \return PathWrapper obj
-            PathWrapper get_path_to_shield();
-            /// Get path to nearest EMP grenade
-            /// \return PathWrapper obj
-            PathWrapper get_path_to_emp();
-            //TODO calculate steps, go to andrePath_[steps]
-            /// Get path to andre
-            /// \return PathWrapper obj
-            PathWrapper get_path_to_andre();
+        map::map_graph &graph() const { return graph_; }
 
-            bool hasEMP_ = false;
-            bool hasShield_ = false;
-            int tankHP = 100;
-        private:
-            map::map_graph &graph_;
-            play::image_drawable drawable_;
-            delta_time t_since_move_{};
-            tank_type type_;
-            PathWrapper* path_{};
-            PathWrapper andrePath_;
-            std::vector<size_t> shields_;
-            std::vector<size_t> grenades_;
-        };
+        /// Get path to nearest shield
+        /// \return PathWrapper obj
+        PathWrapper get_path_to_shield();
 
-    } // namespace kmint
+        /// Get path to nearest EMP grenade
+        /// \return PathWrapper obj
+        PathWrapper get_path_to_emp();
+
+        //TODO calculate steps, go to andrePath_[steps]
+        /// Get path to andre
+        /// \return PathWrapper obj
+        PathWrapper get_path_to_andre();
+
+        bool hasEMP_ = false;
+        bool hasShield_ = false;
+        int tankHP = 100;
+    private:
+        map::map_graph &graph_;
+        play::image_drawable drawable_;
+        delta_time t_since_move_{};
+        tank_type type_;
+        PathWrapper andrePath_;
+        std::vector<size_t> shields_;
+        std::vector<size_t> grenades_;
+    };
+} // namespace kmint
 
 #endif /* KMINT_UFO_TANK_HPP */
