@@ -3,13 +3,13 @@
 
 namespace kmint::ufo {
 
-    dna_entity::dna_entity() : geneticAttributes(dna_string::createRandom()) {}
+    dna_entity::dna_entity() : geneticAttributes() {}
 
-    void dna_entity::setGeneticAttributes(std::unique_ptr<dna_string> &a) {
+    void dna_entity::setGeneticAttributes(dna_string &a) {
         geneticAttributes = std::move(a);
     }
 
-    dna_string &dna_entity::getGeneticAttributes() const {
-        return *geneticAttributes;
+    dna_string dna_entity::getGeneticAttributes() const {
+        return geneticAttributes;
     }
 }

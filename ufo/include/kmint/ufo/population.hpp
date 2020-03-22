@@ -9,12 +9,13 @@ namespace kmint::ufo {
 
     class population {
         public:
-            explicit population(play::stage &s);
-            std::vector<human*> populate();
+            explicit population(play::stage &s, std::vector<math::rectangle> &buildingRectangles);
+            void populate();
         private:
             std::map<human*, double> generatePopulateChances();
-            human* chooseHuman(double random, std::map<human*, double> &chances);
+            human* chooseHuman(double random, std::map<human*, double> &chances, human* notThisHuman = nullptr);
             play::stage& stage;
+            std::vector<math::rectangle> buildingRectangles;
     };
 
 }

@@ -1,6 +1,7 @@
 #include "kmint/ufo/play.hpp"
 #include "kmint/main.hpp" // voor de main loop
 #include "kmint/play.hpp"
+#include "kmint/random.hpp"
 #include "kmint/ufo/andre.hpp"
 #include "kmint/ufo/human.hpp"
 #include "kmint/ufo/resources.hpp"
@@ -12,10 +13,9 @@
 #include <algorithm>
 #include <array>
 #include <iostream>
-#include <random>
 #include <vector>
-#include <kmint/ufo/building.hpp>
-#include <kmint/ufo/population.hpp>
+#include "kmint/ufo/building.hpp"
+#include "kmint/ufo/population.hpp"
 
 namespace kmint::ufo {
 
@@ -28,8 +28,6 @@ int play() {
 
   // maak een podium aan
   play::stage s{ {1024, 768} };
-  std::unique_ptr<population> pop = std::make_unique<kmint::ufo::population>(s);
-  int humanCounter = 0;
   int roundCounter = 0;
   delta_time timer{};
 
@@ -40,9 +38,7 @@ int play() {
                                   graphics::image{m.background_image()});
   s.build_actor<play::map_actor>(math::vector2d{0.f, 0.f}, m.graph());
 
-  for (std::size_t h{0}; h < 100; ++h) {
-    s.build_actor<ufo::human>(humanCounter);
-  }
+  std::vector<math::rectangle> buildingRectangles;
 
   s.build_actor<ufo::building>(math::vector2d {576, 64}, math::size{80, 48}); //row 1, building 1
   s.build_actor<ufo::building>(math::vector2d {624, 64}, math::size{112, 62}); //row 1, building 2
@@ -50,6 +46,14 @@ int play() {
   s.build_actor<ufo::building>(math::vector2d {320, 512}, math::size{112, 128}); //row 3, building 1
   s.build_actor<ufo::building>(math::vector2d {432, 464}, math::size{80, 160}); //row 3, building 2
   s.build_actor<ufo::building>(math::vector2d {576, 400}, math::size{112, 96}); //row 3, building 3
+
+  for(auto it = s.begin(); it != s.end(); it++) {
+      auto &o = *it;
+      if(auto b = dynamic_cast<building*>(&o); b) {
+        buildingRectangles.emplace_back(b->collision_box());
+      }
+  }
+  std::unique_ptr<population> pop = std::make_unique<kmint::ufo::population>(s, buildingRectangles);
 
   s.build_actor<ufo::door>(math::vector2d {600 , 137}); //row 1, building 1
   s.build_actor<ufo::door>(math::vector2d {688 , 119}); //row 1, building 2
@@ -61,10 +65,27 @@ int play() {
   s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::red);
   s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::green);
   s.build_actor<ufo::andre>(graph, ufo::random_node_of_kind(m, 'R'));
+
   s.build_actor<ufo::saucer>(saucer_type::blue);
   s.build_actor<ufo::saucer>(saucer_type::green);
   s.build_actor<ufo::saucer>(saucer_type::beige);
   s.build_actor<ufo::saucer>(saucer_type::yellow);
+
+    for (std::size_t h{0}; h < 100; ++h) {
+        math::vector2d newLocation{0,0};
+        while(newLocation == math::vector2d{0,0}) {
+            math::vector2d randomLocation{ random_scalar(24, 1000), random_scalar(24, 744) };
+            bool contains = false;
+            for(auto it = buildingRectangles.begin(); it != buildingRectangles.end(); it++) {
+                if(math::contains(*it, randomLocation)) {
+                    contains = true;
+                }
+            }
+            if(!contains) newLocation = randomLocation;
+        }
+
+        s.build_actor<ufo::human>(newLocation);
+    }
 
   // Maak een event_source aan (hieruit kun je alle events halen, zoals
   // toetsaanslagen)
@@ -82,8 +103,9 @@ int play() {
       timer = from_seconds(0);
     }
 
-    if(humanCounter >= 100 || roundCounter >= 200) {
+    if(roundCounter >= 200) {
       pop->populate();
+      roundCounter = 0;
     }
 
     for (ui::events::event &e : event_source) {

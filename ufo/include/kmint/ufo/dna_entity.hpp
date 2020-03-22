@@ -10,10 +10,10 @@ namespace kmint::ufo {
     {
     public:
         dna_entity();
-        void setGeneticAttributes(std::unique_ptr<dna_string> &a);
-        dna_string &getGeneticAttributes() const;
+        void setGeneticAttributes(dna_string &a);
+        dna_string getGeneticAttributes() const;
     protected:
-        std::unique_ptr<dna_string> geneticAttributes;
+        dna_string geneticAttributes;
     };
 
 }
