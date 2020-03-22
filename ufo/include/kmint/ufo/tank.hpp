@@ -16,10 +16,11 @@ namespace kmint::ufo {
     class tank : public play::map_bound_actor, public TankStateManager {
         public:
             tank(map::map_graph &g,
-                    map::map_node &initial_node,
-                    tank_type t,
-                    std::vector<size_t> shields,
-                    std::vector<size_t> grenades);
+                 map::map_node &initial_node,
+                 tank_type t,
+                 std::vector<size_t> shields,
+                 std::vector<size_t> grenades,
+                 PathWrapper &andrePath);
 
             tank& operator=(tank &&) = default;
 
@@ -46,9 +47,16 @@ namespace kmint::ufo {
 
             map::map_graph &graph() const { return graph_; }
 
+            /// Get path to nearest shield
+            /// \return PathWrapper obj
             PathWrapper get_path_to_shield();
-
+            /// Get path to nearest EMP grenade
+            /// \return PathWrapper obj
             PathWrapper get_path_to_emp();
+            //TODO calculate steps, go to andrePath_[steps]
+            /// Get path to andre
+            /// \return PathWrapper obj
+            PathWrapper get_path_to_andre();
 
             bool hasEMP_ = false;
             bool hasShield_ = false;
@@ -59,6 +67,7 @@ namespace kmint::ufo {
             delta_time t_since_move_{};
             tank_type type_;
             PathWrapper* path_{};
+            PathWrapper andrePath_;
             std::vector<size_t> shields_;
             std::vector<size_t> grenades_;
         };

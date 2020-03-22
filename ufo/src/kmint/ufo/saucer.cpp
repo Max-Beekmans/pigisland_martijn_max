@@ -72,7 +72,7 @@ void saucer::act(delta_time dt) {
     auto &other = colliding_actor(ix);
     if (dynamic_cast<human *>(&other)) {
       // remove human from play
-	  std::cout << "Beam me up scotty\n";
+	  //std::cout << "Beam me up scotty\n";
       // -- CHANGE THIS TO MORE SUITABLE BEHAVIOR FOR THE ASSESSMENT
       other.remove();
     }

@@ -20,6 +20,7 @@ namespace kmint::ufo {
         ~TankStateManager();
         void transferState(TankBaseState* state);
         void previousState();
+        void reset();
         void executeState(tank& tank);
     private:
         std::stack<TankBaseState*, std::vector<TankBaseState*>> stateStack_{};

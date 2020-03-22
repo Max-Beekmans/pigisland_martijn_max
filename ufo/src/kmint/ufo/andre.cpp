@@ -13,10 +13,11 @@ namespace {
     }
 } // namespace
 
-andre::andre(map::map_graph& g, map::map_node& initial_node):
+andre::andre(map::map_graph& g, map::map_node& initial_node, PathWrapper& pathWrapper):
     play::map_bound_actor{ initial_node },
 	drawable_{ *this,graphics::image{andre_image()}},
-	graph_{g} {}
+	graph_{g},
+	path_(pathWrapper){}
 
 void andre::act(delta_time dt) {
   t_since_move_ += dt;

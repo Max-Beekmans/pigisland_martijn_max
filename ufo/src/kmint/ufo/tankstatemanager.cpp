@@ -1,5 +1,5 @@
 //
-// Created by osboxes on 3/21/20.
+// Created by Max on 3/21/20.
 //
 
 #include "kmint/ufo/tankstatemanager.h"
@@ -23,5 +23,12 @@ namespace kmint::ufo {
 
     void TankStateManager::executeState(tank &stateActor) {
         stateStack_.top()->executeState(stateActor);
+    }
+
+    void TankStateManager::reset() {
+        while(!stateStack_.empty()) {
+            stateStack_.pop();
+        }
+        //transferState(new TravelToWanderState());
     }
 }

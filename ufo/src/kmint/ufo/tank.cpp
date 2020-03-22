@@ -1,11 +1,10 @@
 #include "kmint/ufo/tank.hpp"
 #include "kmint/graphics.hpp"
 #include "kmint/ufo/node_algorithm.hpp"
-#include "kmint/random.hpp"
 #include <iostream>
-#include <kmint/ufo/saucer.hpp>
 #include <utility>
-#include "kmint/ufo/tankwanderstate.h"
+#include "kmint/ufo/saucer.hpp"
+#include "kmint/ufo/traveltoanwbstate.h"
 
 namespace kmint::ufo {
 
@@ -20,15 +19,18 @@ namespace kmint::ufo {
             }
             return graphics::image{"resources/tank_green.png", scale};
         }
-
-
     } // namespace
 
     tank::tank(map::map_graph &g, map::map_node &initial_node, tank_type t,
-               std::vector<size_t> shields, std::vector<size_t> grenades)
-            : play::map_bound_actor{initial_node}, TankStateManager(), type_{t}, graph_{g},
+               std::vector<size_t> shields, std::vector<size_t> grenades, PathWrapper &andrePath)
+            : play::map_bound_actor{initial_node}, TankStateManager(),
+              graph_{g},
               drawable_{*this, graphics::image{tank_image(t)}},
-              path_(nullptr), shields_(std::move(shields)), grenades_(std::move(grenades)) {
+              type_{t},
+              path_(nullptr),
+              andrePath_(andrePath),
+              shields_(std::move(shields)),
+              grenades_(std::move(grenades)) {
         transferState(new TankWanderState());
     }
 
@@ -40,7 +42,7 @@ namespace kmint::ufo {
                 minPair = {s, h};
             }
         }
-        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[minPair.first], graph_);;
+        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[minPair.first], graph_);
     }
 
     PathWrapper tank::get_path_to_emp() {
@@ -51,7 +53,12 @@ namespace kmint::ufo {
                 minPair = {s, h};
             }
         }
-        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[minPair.first], graph_);;
+        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[minPair.first], graph_);
+    }
+
+    PathWrapper tank::get_path_to_andre() {
+        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[andrePath_.popFront()->getNode()->node_id()],
+                                       graph_);
     }
 
     void tank::act(delta_time dt) {
@@ -59,6 +66,9 @@ namespace kmint::ufo {
         if (to_seconds(t_since_move_) >= 1) {
             executeState(*this);
             t_since_move_ = from_seconds(0);
+        }
+        if (tankHP < 0) {
+            transferState(new TravelToANWBState());
         }
 //	if (to_seconds(t_since_move_) >= 1) {
 //	    if(path_ == nullptr || path_->reachedEnd()) {

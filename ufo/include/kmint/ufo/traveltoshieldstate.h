@@ -12,7 +12,7 @@ namespace kmint::ufo {
     class TravelToShieldState : public TankBaseState {
     public:
         void executeState(tank &actor) override {
-            if (path_.isEmpty()) {
+            if (path_.isEmpty() && !path_.reachedEnd()) {
                 path_ = actor.get_path_to_shield();
             } else if(path_.reachedEnd()) {
                 actor.hasShield_ = true;

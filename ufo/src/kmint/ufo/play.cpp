@@ -83,9 +83,10 @@ namespace kmint::ufo {
         s.build_actor<ufo::door>(math::vector2d{456, 620}); //row 3, building 2
         s.build_actor<ufo::door>(math::vector2d{641, 491}); //row 3, building 3
 
-        s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::red, shields, grenades);
-        s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::green, shields, grenades);
-        s.build_actor<ufo::andre>(graph, ufo::random_node_of_kind(m, 'R'));
+        PathWrapper andrePath{};
+        s.build_actor<ufo::andre>(graph, ufo::random_node_of_kind(m, 'R'), andrePath);
+        s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::red, shields, grenades, andrePath);
+        s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::green, shields, grenades, andrePath);
         s.build_actor<ufo::saucer>(saucer_type::blue);
         s.build_actor<ufo::saucer>(saucer_type::green);
         s.build_actor<ufo::saucer>(saucer_type::beige);
