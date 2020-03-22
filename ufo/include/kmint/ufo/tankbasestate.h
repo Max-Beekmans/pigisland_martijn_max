@@ -12,7 +12,7 @@ namespace kmint::ufo {
 
     class TankBaseState {
     public:
-        virtual void executeState(delta_time dt, tank &actor) = 0;
+        virtual void executeState(tank &actor) = 0;
     protected:
         delta_time t_since_move_{};
     };

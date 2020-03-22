@@ -26,7 +26,7 @@ private:
 	delta_time t_since_move_{};
 	play::image_drawable drawable_;
 	map::map_graph& graph_;
-	PathWrapper* path_{};
+	PathWrapper path_;
 	int dest = 0;
 };
 

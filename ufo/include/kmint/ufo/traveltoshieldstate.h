@@ -11,14 +11,21 @@
 namespace kmint::ufo {
     class TravelToShieldState : public TankBaseState {
     public:
-        void executeState(delta_time dt, tank& actor) {
-            t_since_move_ += dt;
-            if(to_seconds(t_since_move_) >= 1) {
-
+        void executeState(tank &actor) override {
+            if (path_.isEmpty()) {
+                path_ = actor.get_path_to_shield();
+            } else if(path_.reachedEnd()) {
+                actor.hasShield_ = true;
+                path_.deletePath();
+                //TODO make it choose
+                actor.previousState();
+                return;
             }
+            actor.node(actor.graph()[path_.popFront()->getNode()->node_id()]);
         }
+
     private:
-        PathWrapper* path_{};
+        PathWrapper path_;
     };
 }
 

@@ -65,7 +65,7 @@ namespace kmint::ufo {
 
     float calculate_heuristic(Heuristic h, map::map_node const &loc, map::map_node const &destLoc);
 
-    PathWrapper * tag_shortest_path_astar(
+    PathWrapper tag_shortest_path_astar(
             Heuristic heuristic,
             map::map_node const &actorLoc,
             map::map_node const &goalLoc,

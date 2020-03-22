@@ -21,7 +21,7 @@ namespace kmint::ufo {
         stateStack_.pop();
     }
 
-    void TankStateManager::executeState(delta_time dt, tank &stateActor) {
-        stateStack_.top()->executeState(dt, stateActor);
+    void TankStateManager::executeState(tank &stateActor) {
+        stateStack_.top()->executeState(stateActor);
     }
 }

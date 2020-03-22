@@ -21,7 +21,7 @@ andre::andre(map::map_graph& g, map::map_node& initial_node):
 void andre::act(delta_time dt) {
   t_since_move_ += dt;
   if (to_seconds(t_since_move_) >= 1) {
-      if(path_ == nullptr || path_->reachedEnd()) {
+      if(path_.isEmpty() || path_.reachedEnd()) {
           if(dest == 0 || dest > 4) {
               dest = 1;
           } else {
@@ -47,7 +47,7 @@ void andre::act(delta_time dt) {
           auto &destNode = ufo::find_node_of_kind(graph_, kind);
           path_ = ufo::tag_shortest_path_astar(ufo::MANHATTAN, node(), destNode, graph_);
       }
-      this->node(graph_[path_->popFront()->getNode()->node_id()]);
+      this->node(graph_[path_.popFront()->getNode()->node_id()]);
 	  t_since_move_ = from_seconds(0);
   }
 }

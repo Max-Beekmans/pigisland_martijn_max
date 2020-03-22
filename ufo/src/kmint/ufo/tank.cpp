@@ -4,37 +4,62 @@
 #include "kmint/random.hpp"
 #include <iostream>
 #include <kmint/ufo/saucer.hpp>
+#include <utility>
 #include "kmint/ufo/tankwanderstate.h"
 
 namespace kmint::ufo {
 
-namespace {
-graphics::image tank_image(tank_type t) {
-  constexpr scalar scale = 0.35;
-  switch (t) {
-  case tank_type::red:
-    return graphics::image{"resources/tank_red.png", scale};
-  case tank_type::green:
-    return graphics::image{"resources/tank_green.png", scale};
-  }
-  return graphics::image{"resources/tank_green.png", scale};
-}
+    namespace {
+        graphics::image tank_image(tank_type t) {
+            constexpr scalar scale = 0.35;
+            switch (t) {
+                case tank_type::red:
+                    return graphics::image{"resources/tank_red.png", scale};
+                case tank_type::green:
+                    return graphics::image{"resources/tank_green.png", scale};
+            }
+            return graphics::image{"resources/tank_green.png", scale};
+        }
 
 
-} // namespace
+    } // namespace
 
-tank::tank(map::map_graph &g, map::map_node& initial_node, tank_type t)
-	: play::map_bound_actor{ initial_node }, TankStateManager(), type_{t}, graph_{g},
-      drawable_{ *this, graphics::image{tank_image(t)}},
-      path_(nullptr) {
-    transferState(new TankWanderState());
-}
+    tank::tank(map::map_graph &g, map::map_node &initial_node, tank_type t,
+               std::vector<size_t> shields, std::vector<size_t> grenades)
+            : play::map_bound_actor{initial_node}, TankStateManager(), type_{t}, graph_{g},
+              drawable_{*this, graphics::image{tank_image(t)}},
+              path_(nullptr), shields_(std::move(shields)), grenades_(std::move(grenades)) {
+        transferState(new TankWanderState());
+    }
 
-void tank::act(delta_time dt) {
-	t_since_move_ += dt;
-	if (to_seconds(t_since_move_) >= 1) {
-	    executeState(dt, *this);
-	}
+    PathWrapper tank::get_path_to_shield() {
+        std::pair<float, float> minPair{MAXFLOAT, MAXFLOAT};
+        for (auto s : shields_) {
+            float h = calculate_heuristic(Heuristic::MANHATTAN, node(), graph_[s]);
+            if (h < minPair.second) {
+                minPair = {s, h};
+            }
+        }
+        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[minPair.first], graph_);;
+    }
+
+    PathWrapper tank::get_path_to_emp() {
+        std::pair<float, float> minPair{MAXFLOAT, MAXFLOAT};
+        for (auto s : grenades_) {
+            float h = calculate_heuristic(Heuristic::MANHATTAN, node(), graph_[s]);
+            if (h < minPair.second) {
+                minPair = {s, h};
+            }
+        }
+        return tag_shortest_path_astar(ufo::MANHATTAN, node(), graph_[minPair.first], graph_);;
+    }
+
+    void tank::act(delta_time dt) {
+        t_since_move_ += dt;
+        if (to_seconds(t_since_move_) >= 1) {
+            executeState(*this);
+            t_since_move_ = from_seconds(0);
+        }
 //	if (to_seconds(t_since_move_) >= 1) {
 //	    if(path_ == nullptr || path_->reachedEnd()) {
 //            auto &dest = ufo::find_node_of_kind(graph_, '1');
@@ -52,6 +77,5 @@ void tank::act(delta_time dt) {
 //		//std::cout << "Saw something at " << a.location().x() << ", "
 //		//	<< a.location().y() << "\n";
 //	}
-}
-
+    }
 } // namespace kmint::ufo

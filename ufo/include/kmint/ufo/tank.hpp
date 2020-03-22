@@ -15,7 +15,12 @@ namespace kmint::ufo {
 
     class tank : public play::map_bound_actor, public TankStateManager {
         public:
-            tank(map::map_graph &g, map::map_node &initial_node, tank_type t);
+            tank(map::map_graph &g,
+                    map::map_node &initial_node,
+                    tank_type t,
+                    std::vector<size_t> shields,
+                    std::vector<size_t> grenades);
+
             tank& operator=(tank &&) = default;
 
             // wordt elke game tick aangeroepen
@@ -39,12 +44,23 @@ namespace kmint::ufo {
 
             tank_type type() const { return type_; }
 
+            map::map_graph &graph() const { return graph_; }
+
+            PathWrapper get_path_to_shield();
+
+            PathWrapper get_path_to_emp();
+
+            bool hasEMP_ = false;
+            bool hasShield_ = false;
+            int tankHP = 100;
         private:
             map::map_graph &graph_;
             play::image_drawable drawable_;
             delta_time t_since_move_{};
             tank_type type_;
             PathWrapper* path_{};
+            std::vector<size_t> shields_;
+            std::vector<size_t> grenades_;
         };
 
     } // namespace kmint
