@@ -87,15 +87,16 @@ namespace kmint::ufo {
 
         if (tankHP <= 0 && !brokenDown) {
             brokenDown = true;
+            float sum = travelToEMPChance + travelToShieldChance + dodgeUfoChance;
             switch(previousChoice) {
                 case 0:
-                    travelToEMPChance += ((100 - tankHP)/empCount);
+                    travelToEMPChance += (((100 - tankHP)/empCount)/sum)*100;
                     break;
                 case 1:
-                    travelToShieldChance += ((100 - tankHP)/shieldCount);
+                    travelToShieldChance += (((100 - tankHP)/shieldCount)/sum)*100;
                     break;
                 case 2:
-                    dodgeUfoChance += ((100 - tankHP)/dodgeCount);
+                    dodgeUfoChance += (((100 - tankHP)/dodgeCount)/sum)*100;
                     break;
                 default :
                     break;
