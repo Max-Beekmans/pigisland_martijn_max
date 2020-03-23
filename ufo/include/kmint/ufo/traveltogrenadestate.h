@@ -18,7 +18,7 @@ namespace kmint::ufo {
             } else if (path_.reachedEnd()) {
                 actor.hasEMP_ = true;
                 float sum = actor.travelToEMPChance + actor.travelToShieldChance + actor.dodgeUfoChance;
-                actor.travelToEMPChance += ((((100 - actor.tankHP)+50)/actor.empCount)/sum);
+                //actor.travelToEMPChance += ((((100 - actor.tankHP)+50)/actor.empCount)/sum);
                 path_.deletePath();
                 imageDrawable.remove_tint();
                 actor.previousState();

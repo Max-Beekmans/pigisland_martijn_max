@@ -61,10 +61,10 @@ namespace kmint::ufo {
         /// \return PathWrapper obj
         PathWrapper get_path_to_andre();
 
-        bool hasEMP_ = true;
+        bool hasEMP_ = false;
         bool hasShield_ = false;
         bool brokenDown = false;
-        int tankHP = 100;
+        int tankHP = 20;
         int previousChoice = -1;
         int dodgeCount = 0;
         float dodgeUfoChance = 33.33;

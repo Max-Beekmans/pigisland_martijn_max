@@ -57,17 +57,40 @@ namespace kmint::ufo {
     }
 
     PathWrapper tank::get_path_to_andre() {
-        PathWrapper pathToAndre = tag_shortest_path_astar(MANHATTAN, node(),
-                                                          graph_[andrePath_.front()->getNode()->node_id()],graph_);
-        if (andrePath_.size() < pathToAndre.size()) {
-            pathToAndre.deletePath();
-            pathToAndre = tag_shortest_path_astar(MANHATTAN, node(),
-                                           graph_[andrePath_.back()->getNode()->node_id()],graph_);
-        } else {
-            size_t size = pathToAndre.size();
-            pathToAndre.deletePath();
-            pathToAndre = tag_shortest_path_astar(MANHATTAN, node(), graph_[andrePath_.at(size+1)->getNode()->node_id()], graph_);
+        PathWrapper pathToAndre;
+        for (int i = 0; i < andrePath_.size(); ++i) {
+            float tankHCost = calculate_heuristic(MANHATTAN, node(), graph_[andrePath_.at(i)->getNode()->node_id()]);
+            float andreHCost = calculate_heuristic(MANHATTAN, graph_[andrePath_.front()->getNode()->node_id()], graph_[andrePath_.at(i)->getNode()->node_id()]);
+            if(tankHCost < andreHCost) {
+                pathToAndre = tag_shortest_path_astar(MANHATTAN, node(), graph_[andrePath_.at(i)->getNode()->node_id()], graph_);
+                return pathToAndre;
+            }
         }
+        int firstKind = 0;
+        int prevKind = graph_[andrePath_.back()->getNode()->node_id()].node_info().kind - '0';
+        firstKind = prevKind;
+        bool first = true;
+        while(firstKind != prevKind || first) {
+            first = false;
+            if(prevKind == 4) {
+                prevKind = 0;
+            }
+            PathWrapper andrePathNext = tag_shortest_path_astar(MANHATTAN,
+                                                                graph_[andrePath_.back()->getNode()->node_id()],
+                                                                find_node_of_kind(graph_, to_char_lit(++prevKind)),graph_);
+            for (int j = 0; j < andrePath_.size(); ++j) {
+                float tankHCost = calculate_heuristic(MANHATTAN, node(), graph_[andrePath_.at(j)->getNode()->node_id()]);
+                float andreHCost = calculate_heuristic(MANHATTAN, graph_[andrePath_.front()->getNode()->node_id()], graph_[andrePath_.at(j)->getNode()->node_id()]);
+                if(tankHCost < andreHCost) {
+                    pathToAndre = tag_shortest_path_astar(MANHATTAN, node(), graph_[andrePath_.at(j)->getNode()->node_id()], graph_);
+                    return pathToAndre;
+                }
+            }
+            andrePathNext.deletePath();
+            firstKind = prevKind;
+        }
+        std::cout << "I'm to far away from andre to catch up. D:" << std::endl;
+        pathToAndre = tag_shortest_path_astar(MANHATTAN, node(), find_node_of_kind(graph_, '1'), graph_);
         return pathToAndre;
     }
 
@@ -90,13 +113,13 @@ namespace kmint::ufo {
             float sum = travelToEMPChance + travelToShieldChance + dodgeUfoChance;
             switch(previousChoice) {
                 case 0:
-                    travelToEMPChance += (((100 - tankHP)/empCount)/sum)*100;
+                    //travelToEMPChance += (((100 - tankHP)/empCount)/sum);
                     break;
                 case 1:
-                    travelToShieldChance += (((100 - tankHP)/shieldCount)/sum)*100;
+                    //travelToShieldChance += (((100 - tankHP)/shieldCount)/sum);
                     break;
                 case 2:
-                    dodgeUfoChance += (((100 - tankHP)/dodgeCount)/sum)*100;
+                    //dodgeUfoChance += (((100 - tankHP)/dodgeCount)/sum);
                     break;
                 default :
                     break;
