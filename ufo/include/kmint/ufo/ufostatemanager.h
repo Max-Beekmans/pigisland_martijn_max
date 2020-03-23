@@ -8,6 +8,7 @@
 #include <stack>
 #include <vector>
 #include <kmint/primitives.hpp>
+#include <kmint/math/vector2d.hpp>
 #include "kmint/ufo/ufobasestate.h"
 
 namespace kmint::ufo {
@@ -21,7 +22,7 @@ namespace kmint::ufo {
         void transferState(UfoBaseState *state);
         void previousState();
         void reset();
-        void executeState(delta_time dt, saucer &actor);
+        void executeState(delta_time dt, saucer &actor, math::vector2d screenVector);
 
     private:
         std::stack<UfoBaseState *, std::vector<UfoBaseState *>> stateStack_{};

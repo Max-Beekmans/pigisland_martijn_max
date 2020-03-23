@@ -27,7 +27,7 @@ namespace kmint::ufo {
         }
     }
 
-    void UfoStateManager::executeState(delta_time dt, kmint::ufo::saucer &actor) {
-        stateStack_.top()->executeState(dt, actor);
+    void UfoStateManager::executeState(delta_time dt, kmint::ufo::saucer &actor, math::vector2d screenVector) {
+        stateStack_.top()->executeState(dt, actor, screenVector);
     }
 }

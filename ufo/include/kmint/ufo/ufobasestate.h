@@ -11,7 +11,7 @@ namespace kmint::ufo {
     class UfoBaseState {
     public:
         virtual ~UfoBaseState() = default;
-        virtual void executeState(delta_time dt, saucer &actor) = 0;
+        virtual void executeState(delta_time dt, saucer &actor, math::vector2d screenVector) = 0;
     protected:
         delta_time t_since_move_{};
     };
