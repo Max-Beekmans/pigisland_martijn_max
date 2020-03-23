@@ -99,6 +99,7 @@ namespace kmint::ufo {
         math::vector2d screenVector{0, 0};
 
         t_since_move_ += dt;
+        auto t_since_move_2 = t_since_move_;
 
         if (to_seconds(t_since_move_) >= 1) {
             randomVector = {random_scalar(-1, 1), random_scalar(-1, 1)};
@@ -183,6 +184,7 @@ namespace kmint::ufo {
 //        finalVector = normalizeForce(finalVector);
 //        heading(finalVector);
 
+        //! Collision with humans
         for (std::size_t ix{}; ix < num_colliding_actors(); ++ix) {
             auto &other = colliding_actor(ix);
             if (auto h = dynamic_cast<human *>(&other); h && huntingIndex != -1) {
@@ -191,21 +193,29 @@ namespace kmint::ufo {
                 h->setIsDead(true);
                 huntingIndex = -1;
             }
-            if (auto h = dynamic_cast<tank *>(&other); h) {
-                if (h->hasEMP_) {
-                    transferState(new FrozenState());
-                } else if (h->hasShield_) {
-                    h->tankHP -= 20;
-                } else {
-                    h->tankHP -= 50;
-                }
-                if (h->tankHP <= 0) {
-                    huntingIndex = -1;
-                }
-            }
         }
 
+        //! Collision with tanks every second
+        if (to_seconds(t_since_move_2) >= 1) {
+            for (std::size_t ix{}; ix < num_colliding_actors(); ++ix) {
+                auto &other = colliding_actor(ix);
+                if (auto h = dynamic_cast<tank *>(&other); h) {
+                    if (h->hasEMP_) {
+                        h->hasEMP_ = false;
+                        transferState(new FrozenState());
+                    } else if (h->hasShield_) {
+                        h->tankHP -= 20;
+                        h->hasShield_ = false;
+                    } else {
+                        h->tankHP -= 50;
+                    }
+                    if (h->tankHP <= 0) {
+                        huntingIndex = -1;
+                    }
+                }
+            }
+            t_since_move_2 = from_seconds(0);
+        }
         location(location() + velocity_ * heading() * to_seconds(dt));
-
     }
 } // namespace kmint::ufo

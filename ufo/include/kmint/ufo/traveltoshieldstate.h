@@ -18,7 +18,8 @@ namespace kmint::ufo {
                 path_ = actor.get_path_to_shield();
             } else if(path_.reachedEnd()) {
                 actor.hasShield_ = true;
-                actor.travelToShieldChance += (((100 - actor.tankHP)+15)/actor.shieldCount);
+                float sum = actor.travelToEMPChance + actor.travelToShieldChance + actor.dodgeUfoChance;
+                actor.travelToShieldChance += ((((100 - actor.tankHP)+15)/actor.shieldCount)/sum);
                 path_.deletePath();
                 //TODO make it choose
                 actor.previousState();
