@@ -57,8 +57,18 @@ namespace kmint::ufo {
     }
 
     PathWrapper tank::get_path_to_andre() {
-        return tag_shortest_path_astar(MANHATTAN, node(),
-                graph_[andrePath_.popFront()->getNode()->node_id()],graph_);
+        PathWrapper pathToAndre = tag_shortest_path_astar(MANHATTAN, node(),
+                                                          graph_[andrePath_.front()->getNode()->node_id()],graph_);
+        if (andrePath_.size() < pathToAndre.size()) {
+            pathToAndre.deletePath();
+            pathToAndre = tag_shortest_path_astar(MANHATTAN, node(),
+                                           graph_[andrePath_.back()->getNode()->node_id()],graph_);
+        } else {
+            size_t size = pathToAndre.size();
+            pathToAndre.deletePath();
+            pathToAndre = tag_shortest_path_astar(MANHATTAN, node(), graph_[andrePath_.at(size)->getNode()->node_id()], graph_);
+        }
+        return pathToAndre;
     }
 
     void tank::act(delta_time dt) {

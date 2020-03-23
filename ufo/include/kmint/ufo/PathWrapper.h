@@ -27,6 +27,16 @@ namespace kmint::ufo {
             }
             return tmp;
         }
+        NodeWrapper* front() const {
+            return _path.back();
+        }
+        NodeWrapper* back() const {
+            return _path.front();
+        }
+        NodeWrapper* at(size_t t) const {
+            return _path.at(t);
+        }
+        std::size_t size() const { return _index; }
         //! If the index smaller than 1 we've moved to the last node
         bool reachedEnd() {
             return reachedEnd_;
