@@ -65,13 +65,14 @@ namespace kmint::ufo {
         bool hasShield_ = false;
         bool brokenDown = false;
         int tankHP = 100;
+        int previousHP = 100;
         int previousChoice = -1;
-        int dodgeCount = 0;
         float dodgeUfoChance = 33.33;
-        int shieldCount = 0;
+        float dodgeUfoFitness = 1;
         float travelToShieldChance = 33.33;
-        int empCount = 0;
+        float travelToShieldFitness = 1;
         float travelToEMPChance = 33.33;
+        float travelToEMPFitness = 1;
     private:
         map::map_graph &graph_;
         play::image_drawable drawable_;

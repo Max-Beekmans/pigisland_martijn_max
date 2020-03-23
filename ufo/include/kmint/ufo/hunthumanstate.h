@@ -8,9 +8,12 @@
 namespace kmint::ufo {
     class HuntHumanState : public UfoBaseState {
         void executeState(delta_time dt, saucer &actor, math::vector2d screenVector) override {
+            auto& imageDrawable = dynamic_cast<play::image_drawable &>(actor.getMutableDrawable());
+            imageDrawable.set_tint(graphics::color(255, 255, 0));
             for (std::size_t ix{}; ix < actor.num_perceived_actors(); ++ix) {
                 auto &other = actor.perceived_actor(ix);
                 if (auto h = dynamic_cast<tank *>(&other); h && !h->brokenDown) {
+                    imageDrawable.remove_tint();
                     actor.previousState();
                     return;
                 }
@@ -18,6 +21,7 @@ namespace kmint::ufo {
             math::vector2d huntingVector{0, 0};
             int huntingIndex = actor.findInStage<human>();
             if (huntingIndex < 0) {
+                imageDrawable.remove_tint();
                 actor.previousState();
                 return;
             }

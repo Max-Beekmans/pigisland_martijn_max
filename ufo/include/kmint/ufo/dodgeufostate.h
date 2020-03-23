@@ -9,8 +9,8 @@ namespace kmint::ufo {
     class DodgeUfoState : public TankBaseState {
     public:
         void executeState(tank &actor) override {
-            actor.shieldCount++;
-            actor.previousChoice = 2;
+            auto& imageDrawable = dynamic_cast<play::image_drawable &>(actor.getMutableDrawable());
+            imageDrawable.set_tint(graphics::color(160, 160, 100));
             for (std::size_t ix{}; ix < actor.num_perceived_actors(); ++ix) {
                 auto &other = actor.perceived_actor(ix);
                 if (dynamic_cast<saucer *>(&other)) {
@@ -30,6 +30,7 @@ namespace kmint::ufo {
                     //! Go to the successor with the highest hCost
                     //! (Furthest node away from ufo)
                     actor.node(actor.graph()[maxFloatPair.first]);
+                    imageDrawable.remove_tint();
                     actor.previousState();
                     return;
                 }

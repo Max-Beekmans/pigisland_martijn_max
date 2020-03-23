@@ -73,7 +73,13 @@ namespace kmint::ufo {
 
     void tank::act(delta_time dt) {
         t_since_move_ += dt;
-        if (to_seconds(t_since_move_) >= 1) {
+        int move_delay = 1;
+
+        if (node().node_info().kind == 'M') {
+            move_delay = 4;
+        }
+
+        if (to_seconds(t_since_move_) >= move_delay) {
             executeState(*this);
             t_since_move_ = from_seconds(0);
         }
@@ -87,20 +93,6 @@ namespace kmint::ufo {
 
         if (tankHP <= 0 && !brokenDown) {
             brokenDown = true;
-            float sum = travelToEMPChance + travelToShieldChance + dodgeUfoChance;
-            switch(previousChoice) {
-                case 0:
-                    travelToEMPChance += (((100 - tankHP)/empCount)/sum)*100;
-                    break;
-                case 1:
-                    travelToShieldChance += (((100 - tankHP)/shieldCount)/sum)*100;
-                    break;
-                case 2:
-                    dodgeUfoChance += (((100 - tankHP)/dodgeCount)/sum)*100;
-                    break;
-                default :
-                    break;
-            }
             std::cout << "Tank broke down" << std::endl;
             transferState(new TravelToANWBState());
         }

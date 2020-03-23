@@ -8,9 +8,12 @@
 namespace kmint::ufo {
     class HuntTankState : public UfoBaseState {
         void executeState(delta_time dt, saucer &actor, math::vector2d screenVector) override {
+            auto& imageDrawable = dynamic_cast<play::image_drawable &>(actor.getMutableDrawable());
+            imageDrawable.set_tint(graphics::color(255, 0, 0));
             math::vector2d huntingVector{0, 0};
             int huntingIndex = actor.findInStage<tank>();
             if (huntingIndex < 0) {
+                imageDrawable.remove_tint();
                 actor.previousState();
                 return;
             }
