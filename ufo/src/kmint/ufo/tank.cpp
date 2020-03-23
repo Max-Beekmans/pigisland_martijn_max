@@ -66,7 +66,7 @@ namespace kmint::ufo {
         } else {
             size_t size = pathToAndre.size();
             pathToAndre.deletePath();
-            pathToAndre = tag_shortest_path_astar(MANHATTAN, node(), graph_[andrePath_.at(size)->getNode()->node_id()], graph_);
+            pathToAndre = tag_shortest_path_astar(MANHATTAN, node(), graph_[andrePath_.at(size+1)->getNode()->node_id()], graph_);
         }
         return pathToAndre;
     }
@@ -87,6 +87,19 @@ namespace kmint::ufo {
 
         if (tankHP <= 0 && !brokenDown) {
             brokenDown = true;
+            switch(previousChoice) {
+                case 0:
+                    travelToEMPChance += ((100 - tankHP)/empCount);
+                    break;
+                case 1:
+                    travelToShieldChance += ((100 - tankHP)/shieldCount);
+                    break;
+                case 2:
+                    dodgeUfoChance += ((100 - tankHP)/dodgeCount);
+                    break;
+                default :
+                    break;
+            }
             std::cout << "Tank broke down" << std::endl;
             transferState(new TravelToANWBState());
         }

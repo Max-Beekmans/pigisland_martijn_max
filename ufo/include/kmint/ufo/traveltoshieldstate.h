@@ -12,10 +12,13 @@ namespace kmint::ufo {
     class TravelToShieldState : public TankBaseState {
     public:
         void executeState(tank &actor) override {
+            actor.shieldCount++;
+            actor.previousChoice = 1;
             if (path_.isEmpty() && !path_.reachedEnd()) {
                 path_ = actor.get_path_to_shield();
             } else if(path_.reachedEnd()) {
                 actor.hasShield_ = true;
+                actor.travelToShieldChance += (((100 - actor.tankHP)+15)/actor.shieldCount);
                 path_.deletePath();
                 //TODO make it choose
                 actor.previousState();

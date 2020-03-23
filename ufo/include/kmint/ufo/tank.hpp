@@ -62,10 +62,17 @@ namespace kmint::ufo {
         /// \return PathWrapper obj
         PathWrapper get_path_to_andre();
 
-        bool hasEMP_ = true;
+        bool hasEMP_ = false;
         bool hasShield_ = false;
         bool brokenDown = false;
-        int tankHP = 20;
+        int tankHP = 100;
+        int previousChoice = -1;
+        int dodgeCount = 0;
+        float dodgeUfoChance = 33.33;
+        int shieldCount = 0;
+        float travelToShieldChance = 33.33;
+        int empCount = 0;
+        float travelToEMPChance = 33.33;
     private:
         map::map_graph &graph_;
         play::image_drawable drawable_;

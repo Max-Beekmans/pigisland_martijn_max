@@ -9,6 +9,8 @@ namespace kmint::ufo {
     class DodgeUfoState : public TankBaseState {
     public:
         void executeState(tank &actor) override {
+            actor.shieldCount++;
+            actor.previousChoice = 2;
             for (std::size_t ix{}; ix < actor.num_perceived_actors(); ++ix) {
                 auto &other = actor.perceived_actor(ix);
                 if (dynamic_cast<saucer *>(&other)) {
