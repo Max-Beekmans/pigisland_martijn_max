@@ -61,7 +61,7 @@ namespace kmint::ufo {
         /// \return PathWrapper obj
         PathWrapper get_path_to_andre();
 
-        bool hasEMP_ = true;
+        bool hasEMP_ = false;
         bool hasShield_ = false;
         bool brokenDown = false;
         int tankHP = 100;

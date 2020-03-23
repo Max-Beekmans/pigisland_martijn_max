@@ -165,6 +165,7 @@ namespace kmint::ufo {
                 });
             }
         });
+        andrePath.deletePath();
         return 0;
     }
 
