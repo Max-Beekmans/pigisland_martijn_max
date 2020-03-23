@@ -19,6 +19,8 @@ namespace kmint::ufo {
 
         ui::drawable const &drawable() const override { return drawable_; }
 
+        ui::drawable &getMutableDrawable() { return drawable_; }
+
         void act(delta_time dt) override;
 
         // participates in collisions

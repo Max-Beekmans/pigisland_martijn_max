@@ -10,7 +10,7 @@ namespace kmint::ufo {
     public:
         void executeState(tank &actor) override {
             auto& imageDrawable = dynamic_cast<play::image_drawable &>(actor.getMutableDrawable());
-            imageDrawable.set_tint(graphics::colors::black);
+            imageDrawable.set_tint(graphics::color(255, 0, 0));
             if (path_.isEmpty() && !path_.reachedEnd()) {
                 path_ = actor.get_path_to_emp();
             } else if (path_.reachedEnd()) {

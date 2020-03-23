@@ -12,12 +12,15 @@ namespace kmint::ufo {
     class TravelToShieldState : public TankBaseState {
     public:
         void executeState(tank &actor) override {
+            auto& imageDrawable = dynamic_cast<play::image_drawable &>(actor.getMutableDrawable());
+            imageDrawable.set_tint(graphics::color(255, 0, 255));
             if (path_.isEmpty() && !path_.reachedEnd()) {
                 path_ = actor.get_path_to_shield();
             } else if(path_.reachedEnd()) {
                 actor.hasShield_ = true;
                 path_.deletePath();
                 //TODO make it choose
+                imageDrawable.remove_tint();
                 actor.previousState();
                 return;
             }
