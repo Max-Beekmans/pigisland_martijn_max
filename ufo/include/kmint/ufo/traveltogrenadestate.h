@@ -9,12 +9,15 @@ namespace kmint::ufo {
     class TravelToGrenadeState : public TankBaseState {
     public:
         void executeState(tank &actor) override {
+            actor.empCount++;
+            actor.previousChoice = 0;
             auto& imageDrawable = dynamic_cast<play::image_drawable &>(actor.getMutableDrawable());
             imageDrawable.set_tint(graphics::color(255, 0, 0));
             if (path_.isEmpty() && !path_.reachedEnd()) {
                 path_ = actor.get_path_to_emp();
             } else if (path_.reachedEnd()) {
                 actor.hasEMP_ = true;
+                actor.travelToEMPChance += (((100 - actor.tankHP)+50)/actor.empCount);
                 path_.deletePath();
                 imageDrawable.remove_tint();
                 actor.previousState();

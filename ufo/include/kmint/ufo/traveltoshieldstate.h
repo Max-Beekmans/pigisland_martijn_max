@@ -14,10 +14,14 @@ namespace kmint::ufo {
         void executeState(tank &actor) override {
             auto& imageDrawable = dynamic_cast<play::image_drawable &>(actor.getMutableDrawable());
             imageDrawable.set_tint(graphics::color(255, 0, 255));
+            actor.shieldCount++;
+            actor.previousChoice = 1;
+
             if (path_.isEmpty() && !path_.reachedEnd()) {
                 path_ = actor.get_path_to_shield();
             } else if(path_.reachedEnd()) {
                 actor.hasShield_ = true;
+                actor.travelToShieldChance += (((100 - actor.tankHP)+15)/actor.shieldCount);
                 path_.deletePath();
                 //TODO make it choose
                 imageDrawable.remove_tint();

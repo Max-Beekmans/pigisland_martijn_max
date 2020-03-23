@@ -50,6 +50,7 @@ namespace kmint::ufo {
             for(auto ptr : _path) {
                 delete ptr;
             }
+            reachedEnd_ = false;
         }
     private:
         std::vector<NodeWrapper*> _path;

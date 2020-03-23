@@ -29,20 +29,24 @@ namespace kmint::ufo {
         scalar collision_range() const override { return 32.0; }
 
         int v() const { return velocity_; }
+        void setV(int v) { velocity_ = v; }
 
         void setLocation(math::vector2d loc) { location(loc); }
+
+        template <typename T>
+        int findInStage();
 
         bool perceptive() const override { return true; }
         scalar perception_range() const override { return 150.f; }
 
+        math::vector2d randomVector{0, 0};
+        play::stage& stage;
+        int huntingIndex;
     private:
         play::image_drawable drawable_;
         saucer_type type_;
         int velocity_;
-        int huntingIndex_;
-        play::stage& stage_;
         delta_time t_since_move_{};
-        math::vector2d randomVector_{0,0};
     };
 
 } // namespace kmint::ufo
