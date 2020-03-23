@@ -8,7 +8,7 @@
 namespace kmint::ufo {
     class UfoWanderState : public UfoBaseState {
         void executeState(delta_time dt, saucer &actor) override {
-            actor.setLocation(actor.location() + actor.v() * to_seconds(dt));
+            //actor.setLocation(actor.location() + actor.v() * to_seconds(dt));
         }
     };
 }

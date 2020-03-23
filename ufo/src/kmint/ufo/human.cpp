@@ -169,7 +169,8 @@ void human::act(delta_time dt) {
         screenVector = normalizeForce(screenVector);
     }
 
-    math::vector2d finalVector = forceVector + screenVector + collisionAvoidanceVector + (screenVector + collisionAvoidanceVector + forceVector == math::vector2d{0,0} ? randomVector_ : math::vector2d{0,0});
+    math::vector2d finalVector = forceVector + screenVector * 2 + collisionAvoidanceVector;
+    finalVector += (finalVector == math::vector2d{0,0} ? randomVector_ : math::vector2d{0,0});
     finalVector = normalizeForce(finalVector);
     heading(finalVector);
 
