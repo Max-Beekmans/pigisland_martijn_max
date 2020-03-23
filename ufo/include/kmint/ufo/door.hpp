@@ -11,6 +11,7 @@ namespace kmint::ufo {
 class door : public play::free_roaming_actor {
 public:
     door(math::vector2d location);
+    void act(delta_time dt) override;
 	// als incorporeal false is, doet de actor mee aan collision detection
 	bool incorporeal() const override { return false; }
 	// geeft de lengte van een zijde van de collision box van deze actor terug.

@@ -11,7 +11,6 @@ namespace kmint::ufo {
         dna_string(double attractionToRedTank, double attractionToGreenTank, double attractionToUFO, double attractionToDoors, double cohesion, double separation, double alignment );
         dna_string();
 
-        static std::unique_ptr<dna_string> createRandom();
         chromosome getChromosome() const;
         void setChromosome(chromosome const &c);
         dna_string operator*(dna_string const &other) const;

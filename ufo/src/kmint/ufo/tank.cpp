@@ -1,6 +1,7 @@
 #include <iostream>
 #include <utility>
 #include "kmint/ufo/tank.hpp"
+#include "kmint/ufo/human.hpp"
 #include "kmint/graphics.hpp"
 #include "kmint/ufo/node_algorithm.hpp"
 #include "kmint/ufo/saucer.hpp"
@@ -68,6 +69,13 @@ namespace kmint::ufo {
         }
         if (tankHP < 0) {
             transferState(new TravelToANWBState());
+        }
+        
+        for (std::size_t ix{}; ix < num_colliding_actors(); ++ix) {
+            auto &other = colliding_actor(ix);
+            if (auto h = dynamic_cast<human *>(&other); h) {
+                type_ == tank_type::green ? h->setIsSafe(true) : h->setIsDead(true);
+            }
         }
     }
 } // namespace kmint::ufo
