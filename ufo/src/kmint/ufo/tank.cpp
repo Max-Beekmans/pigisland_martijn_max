@@ -57,8 +57,8 @@ namespace kmint::ufo {
     }
 
     PathWrapper tank::get_path_to_andre() {
-        return tag_shortest_path_astar(MANHATTAN, node(), graph_[andrePath_.popFront()->getNode()->node_id()],
-                                       graph_);
+        return tag_shortest_path_astar(MANHATTAN, node(),
+                graph_[andrePath_.popFront()->getNode()->node_id()],graph_);
     }
 
     void tank::act(delta_time dt) {
@@ -67,15 +67,18 @@ namespace kmint::ufo {
             executeState(*this);
             t_since_move_ = from_seconds(0);
         }
-        if (tankHP < 0) {
-            transferState(new TravelToANWBState());
-        }
-        
+
         for (std::size_t ix{}; ix < num_colliding_actors(); ++ix) {
             auto &other = colliding_actor(ix);
             if (auto h = dynamic_cast<human *>(&other); h) {
                 type_ == tank_type::green ? h->setIsSafe(true) : h->setIsDead(true);
             }
+        }
+
+        if (tankHP <= 0 && !brokenDown) {
+            brokenDown = true;
+            std::cout << "Tank broke down" << std::endl;
+            transferState(new TravelToANWBState());
         }
     }
 } // namespace kmint::ufo

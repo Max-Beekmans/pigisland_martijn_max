@@ -17,9 +17,13 @@ namespace kmint::ufo {
                 path_ = actor.get_path_to_andre();
             } else if (path_.reachedEnd()) {
                 actor.tankHP = 100;
+                actor.brokenDown = false;
                 path_.deletePath();
+                actor.reset();
                 actor.transferState(new TankWanderState());
+                return;
             }
+            actor.node(actor.graph()[path_.popFront()->getNode()->node_id()]);
         }
     private:
         PathWrapper path_;

@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <kmint/ufo/tank.hpp>
 #include "kmint/ufo/saucer.hpp"
 #include "kmint/ufo/human.hpp"
 #include "kmint/ufo/ufowanderstate.h"
@@ -76,6 +77,16 @@ namespace kmint::ufo {
             auto &other = colliding_actor(ix);
             if (auto h = dynamic_cast<human *>(&other); h) {
                 h->setIsDead(true);
+            }
+
+            if (auto h = dynamic_cast<tank *>(&other); h) {
+                if (h->hasEMP_) {
+                    //TODO transfer to frozen state
+                } else if (h->hasShield_) {
+                    h->tankHP -= 20;
+                } else {
+                    h->tankHP -= 50;
+                }
             }
         }
     }

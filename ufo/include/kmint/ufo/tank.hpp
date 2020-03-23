@@ -64,13 +64,14 @@ namespace kmint::ufo {
 
         bool hasEMP_ = false;
         bool hasShield_ = false;
-        int tankHP = 100;
+        bool brokenDown = false;
+        int tankHP = 20;
     private:
         map::map_graph &graph_;
         play::image_drawable drawable_;
         delta_time t_since_move_{};
         tank_type type_;
-        PathWrapper andrePath_;
+        PathWrapper &andrePath_;
         std::vector<size_t> shields_;
         std::vector<size_t> grenades_;
     };
