@@ -111,10 +111,10 @@ namespace kmint::ufo {
         s.build_actor<ufo::andre>(graph, ufo::random_node_of_kind(m, 'R'), andrePath);
         s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::red, shields, grenades, andrePath);
         s.build_actor<ufo::tank>(graph, ufo::random_node_of_kind(m, 'T'), tank_type::green, shields, grenades, andrePath);
-        s.build_actor<ufo::saucer>(saucer_type::blue);
-        s.build_actor<ufo::saucer>(saucer_type::green);
-        s.build_actor<ufo::saucer>(saucer_type::beige);
-        s.build_actor<ufo::saucer>(saucer_type::yellow);
+        s.build_actor<ufo::saucer>(saucer_type::blue, s);
+        s.build_actor<ufo::saucer>(saucer_type::green, s);
+        s.build_actor<ufo::saucer>(saucer_type::beige, s);
+        s.build_actor<ufo::saucer>(saucer_type::yellow, s);
 
         // Maak een event_source aan (hieruit kun je alle events halen, zoals
         // toetsaanslagen)
