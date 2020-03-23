@@ -5,7 +5,7 @@
 #include "kmint/ufo/saucer.hpp"
 #include "kmint/ufo/human.hpp"
 #include "kmint/ufo/ufowanderstate.h"
-#include "kmint/ufo/forzenstate.h"
+#include "kmint/ufo/frozenstate.h"
 
 namespace kmint::ufo {
 

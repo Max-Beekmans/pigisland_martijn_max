@@ -23,11 +23,11 @@ namespace kmint::ufo {
                 auto &other = actor.perceived_actor(ix);
                 if (dynamic_cast<saucer *>(&other)) {
                     int nextAction = random_int(0, 100);
-                    if (nextAction < 33) {
+                    if (nextAction < actor.travelToEMPChance) {
                         std::cout << "Tank will go to grenade " << std::endl;
                         actor.transferState(new TravelToGrenadeState());
                         return;
-                    } else if(nextAction > 33 && nextAction < 66) {
+                    } else if(nextAction > actor.travelToShieldChance && nextAction < actor.dodgeUfoChance) {
                         std::cout << "Tank will go to shield " << std::endl;
                         actor.transferState(new TravelToShieldState());
                         return;
